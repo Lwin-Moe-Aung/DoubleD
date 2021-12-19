@@ -20,9 +20,9 @@
                                 </div>
                             </div>
                             <div class="card-header">
-                                <h3 class="card-title">Admin List</h3>
+                                <h3 class="card-title">Notification List</h3>
                                 <div style="float:right;">
-                                    <a  class="btn btn-block bg-gradient-success" href="{{ route('stocks.create') }}">&plus;Add</a>
+                                    <a  class="btn btn-block bg-gradient-success" href="{{ route('notifications.create') }}">&plus;Add</a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -123,7 +123,7 @@
 
 <script>
     $(function () {
-        alert("hello");
+        
         let ip_address = '127.0.0.1';
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);

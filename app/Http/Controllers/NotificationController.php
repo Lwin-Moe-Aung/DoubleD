@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
+use App\Notification;
 use Illuminate\Http\Request;
-use App\Stock;
-use App\Position;
-use App\Events\StockUploadEvent;
-//use App\Events\StockEvent;
+// use App\Events\Notification;
 
-
-class StockController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        return view("admin.stock.index");
+        return view("admin.notifications.index");
     }
 
     /**
@@ -28,8 +26,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        $position = Position::first();
-        return view('admin.stock.create', compact('position'));
+        return view('admin.notifications.create');
     }
 
     /**
@@ -40,36 +37,30 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
         $request->validate([
-            'item' => 'required'
+            'message' => 'required'
         ]);
-        $item = $request->item;
-        $first_p = (int)$request->first_p;
-        $second_p = (int)$request->second_p;
-        
-        $selected_item = substr( $item, $first_p-1, 1); 
-        $selected_item .= substr( $item, $second_p-1, 1); 
-        
-        $stock = new Stock;
-        $stock->item = $item;
-        $stock->selected_item =  $selected_item;
-        $stock->save();
-        
-        //event(new StockUploadEvent($stock->toArray()));
-        event(new StockEvent($stock->toArray()));
+       
+        Notification::create($request->all());
+        // $affected = DB::table('users')->where('role', '=', 'Subadmin')->update(array('noti_count' => noti_count+2));
+        DB::table('users')
+            ->where('role', '=', 'Subadmin')
+            ->update([
+                'noti_count' => DB::raw('noti_count + 1'),
+            ]);
+        //event(new StockEvent($stock->toArray()));
 
-        return redirect()->route('stocks.index')
-                        ->with('success','Stock created successfully.');
+        return redirect()->route('notifications.index')
+                        ->with('success','Notification created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Notification $notification)
     {
         //
     }
@@ -77,10 +68,10 @@ class StockController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -89,10 +80,10 @@ class StockController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -100,10 +91,10 @@ class StockController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Notification $notification)
     {
         //
     }
