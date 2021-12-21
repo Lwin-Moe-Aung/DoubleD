@@ -128,7 +128,11 @@
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
 
-        socket.on("private-channel:App\\Events\\StockEvent", function (message)
+        // socket.on("private-channel:App\\Events\\StockEvent", function (message)
+        //     {
+        //        console.log(message);
+        //     });
+          socket.on("private", function (message)
             {
                console.log(message);
             });
