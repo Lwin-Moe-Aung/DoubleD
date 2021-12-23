@@ -21,6 +21,9 @@ server.listen(8005, function () {
 redis.subscribe('stock-upload-channel', function() {
     console.log('subscribed to private channel');
 });
+redis.subscribe('tip-upload-channel', function() {
+    console.log('subscribed to private channel');
+});
 // redis.subscribe('private-channel', function() {
 //     console.log('subscribed to private channel');
 // });
@@ -30,11 +33,16 @@ redis.on('message', function(channel, message) {
     if (channel == 'stock-upload-channel') {
         let data = message.data.data;
         let event = message.event;
-        console.log("in stock-upload-channel");
         console.log(channel + ':' + event);
-        console.log(data);
         //console.log(event);
         io.emit("private", data);
+    }
+    if (channel == 'tip-upload-channel') {
+        let data = message.data.data;
+        let event = message.event;
+        console.log(channel + ':' + event);
+        console.log(data);
+        io.emit(channel, data);
     }
 });
 

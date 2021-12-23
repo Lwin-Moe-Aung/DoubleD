@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StockUploadEvent implements ShouldBroadcast
+class TipsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -32,7 +32,7 @@ class StockUploadEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['stock-upload-channel'];
-        //return new PrivateChannel('channel-name');
+        // return new PrivateChannel('channel-name');
+        return ['tip-upload-channel'];
     }
 }

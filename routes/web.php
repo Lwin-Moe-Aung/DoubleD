@@ -22,5 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('positions', 'PositionController');
 Route::resource('stocks', 'StockController');
 Route::resource('notifications', 'NotificationController');
+Route::resource('tips', 'TipController');
+Route::post('tip-delete/{id}', 'TipController@destroy');
 
 

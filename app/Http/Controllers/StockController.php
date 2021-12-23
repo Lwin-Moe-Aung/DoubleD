@@ -147,6 +147,7 @@ class StockController extends Controller
                 $data = [];
                 $data['stock'] = $stock;
                 $data['selected_stock'] = $selected_stock;
+                $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true :false;
                 $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
                
                 event(new StockEvent($data));
@@ -154,7 +155,7 @@ class StockController extends Controller
                 ->with('success','Stock created successfully.');
             } catch (\Exception $e) {
                 $ss->delete();
-                dd($e);
+               
             }
         }
        

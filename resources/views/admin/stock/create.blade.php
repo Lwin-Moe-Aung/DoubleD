@@ -106,7 +106,7 @@
                                                     <!-- /.card-body -->
                                                     <div class="card-footer">
                                                         <button type="submit" class="btn btn-primary float-right ml-2">Upload</button>
-                                                        <button type="submit" class="btn btn-default float-right">Cancle</button>
+                                                        <a href="{{ url()->previous() }}" class="btn btn-default float-right">Back</a>
                                                     </div>
                                                 </form>
                                             </div>
