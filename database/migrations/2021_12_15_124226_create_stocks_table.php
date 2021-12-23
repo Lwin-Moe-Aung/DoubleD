@@ -15,8 +15,9 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('item', 100);
-            $table->string('selected_item', 100);
+            $table->string('stock', 100);
+            $table->string('selected_stock', 100);
+            $table->integer('user_id');
             $table->softDeletes('deleted_at', 0);
             $table->timestamps();
         });

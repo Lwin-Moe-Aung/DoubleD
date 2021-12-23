@@ -32,7 +32,7 @@ class StockEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['private-channel'];
+        return ['stock-upload-channel'];
 
         // return new PrivateChannel('channel-name');
     }

@@ -1,18 +1,11 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-// const cors = require('cors');
-// app.use(
-//     cors({
-//         origin: "http://localhost:8000",
-//     })
-// )
-// const io = require('socket.io')(server);
 const io = require('socket.io')(server, {
     cors: { 
-        origin: "http://localhost:8000",
+        // origin: "http://localhost:8000",
+        origin: "http://18.183.164.200",
         methods: ["GET", "POST"],
-        allowedHeaders: ["my-custom-header"],
         credentials: true
     },
     allowEIO3: true
@@ -25,22 +18,21 @@ server.listen(8005, function () {
     console.log('Listening to port 8005');
 });
 
-redis.subscribe('private-channel', function() {
+redis.subscribe('stock-upload-channel', function() {
     console.log('subscribed to private channel');
 });
-// redis.subscribe('*', function(err, count) {
-//     console.log('Subscribed');
+// redis.subscribe('private-channel', function() {
+//     console.log('subscribed to private channel');
 // });
-
 
 redis.on('message', function(channel, message) {
     message = JSON.parse(message);
-    //console.log(channel);
-    if (channel == 'private-channel') {
+    if (channel == 'stock-upload-channel') {
         let data = message.data.data;
         let event = message.event;
         console.log("in stock-upload-channel");
         console.log(channel + ':' + event);
+        console.log(data);
         //console.log(event);
         io.emit("private", data);
     }

@@ -9,10 +9,20 @@
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/> --}}
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.bootstrap4.min.css" /> --}}
+    
+    <!-- DataTables -->
+    <link href="{{ asset('css/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" >
+    <link href="{{ asset('css/datatables-responsive/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" >
+    <link href="{{ asset('css/datatables-buttons/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" >
+    <!-- Theme style -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @yield('third_party_stylesheets')
-
+    @yield('css')
     @stack('page_css')
 </head>
 
@@ -179,14 +189,31 @@
     </footer>
 </div>
 
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+{{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 {{-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script> --}}
-{{-- <script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script> --}}
+
+ <!-- datatable -->
+<script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('js/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('js/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('js/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('js/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('js/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('js/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<script src="{{ asset('js/dist/js/adminlte.min.js') }}"></script>
+
 
 @yield('scripts')
 
