@@ -10,39 +10,49 @@ class StockController extends Controller
 {
     public function gettingStock()
     {
+        
         $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
-        // return $selected_log;
-        if($selected_log != null) {
-            if($selected_log->evening_second_select != null){   
-                $data = $this->eveningSecondSelect($selected_log);
-            }elseif($selected_log->evening_first_select != null){
-                $data = $this->eveningFirstSelect($selected_log);
-            }
-            elseif($selected_log->morning_second_select != null){
-                $data = $this->morningSecondSelect($selected_log);
-            }else{
-                $data = $this->morningFirstSelect($selected_log);
-            }
-           
-        }else{
+        if($selected_log == null){
             $latestStock = $this->getLatestStock();
-            // return $latestStock;
-            $data["stock"] =  $latestStock->stock;
-            $data["selected_stock1"] = [
-                "selected_stock1" => substr($latestStock->selected_stock, 0, 1),
-                "stock1_stop" => false
-            ];
-            $data["selected_stock2"] = [
-                "selected_stock2" => substr($latestStock->selected_stock, 1, 1),
-                "stock2_stop" => false
-            ];
-            $data["is_morning"] = true;
-            // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
-            $data["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
-            $data = [
-                $data
-            ];
+            if($latestStock == null){
+                $selected_log = SelectedLog::latest()->first();
+                if($selected_log == null){
+                    $data = [];
+                    return response()->json($data);
+                }
+            }else{
+                $data["stock"] =  $latestStock->stock;
+                $data["selected_stock1"] = [
+                    "selected_stock1" => substr($latestStock->selected_stock, 0, 1),
+                    "stock1_stop" => false
+                ];
+                $data["selected_stock2"] = [
+                    "selected_stock2" => substr($latestStock->selected_stock, 1, 1),
+                    "stock2_stop" => false
+                ];
+                $data["is_morning"] = true;
+                // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
+                $data["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+                $data = [
+                    $data
+                ];
+
+                return response()->json($data);
+            }
         }
+
+        if($selected_log->evening_second_select != null){   
+            $data = $this->eveningSecondSelect($selected_log);
+        }elseif($selected_log->evening_first_select != null){
+            $data = $this->eveningFirstSelect($selected_log);
+        }
+        elseif($selected_log->morning_second_select != null){
+            $data = $this->morningSecondSelect($selected_log);
+        }else{
+            $data = $this->morningFirstSelect($selected_log);
+        }
+           
+        
         return response()->json($data);
     }
 
@@ -134,10 +144,12 @@ class StockController extends Controller
 
     public function getLatestStock()
     {  
-        $stock = Stock::latest()->first();
-        if($stock == null){
-            return "";
-        }
+        // $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
+
+        $stock = Stock::whereDate('created_at', '=', date('Y-m-d'))
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+        
         return $stock;
     }
 
