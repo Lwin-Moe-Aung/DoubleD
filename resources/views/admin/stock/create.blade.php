@@ -57,38 +57,45 @@
                                                                     @case($selected_log->morning_second_select == null)
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
-                                                                            <label class="form-check-label">2:00 Number</label>
+                                                                            <label class="form-check-label">Morning Second Number</label>
                                                                         </div>
                                                                         <input type="text" name="type" class="form-control"
-                                                                            value= "morning_second_select" hidden>
+                                                                            value= "morning_second_select" hidden id="type">
                                                                         @break
                                                                     @case($selected_log->evening_first_select == null)
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio" name="radio" value="evening_first_select">
-                                                                            <label class="form-check-label">5:30 Number</label>
+                                                                            <label class="form-check-label">Evening First Number</label>
                                                                         </div>
                                                                         <input type="text" name="type" class="form-control"
-                                                                            value= "evening_first_select" hidden>
+                                                                            value= "evening_first_select" hidden id="type">
                                                                         {{-- <div class="form-check">
                                                                             <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
                                                                             <label class="form-check-label">6:00 Number</label>
                                                                         </div> --}}
                                                                         @break
-                                                                    @default
+                                                                    @case($selected_log->evening_second_select == null)
                                                                         <div class="form-check">
                                                                             <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
-                                                                            <label class="form-check-label">6:00 Number</label>
+                                                                            <label class="form-check-label">Evening Second Number</label>
                                                                         </div>
                                                                         <input type="text" name="type" class="form-control"
-                                                                            value= "evening_second_select" hidden>
+                                                                            value= "evening_second_select" hidden id="type">
+                                                                        @break
+                                                                    @default
+                                                                        <div class="alert alert-success">
+                                                                            <strong>Good Job!</strong> Upload complete for Today.Thanks! 
+                                                                        </div>
+                                                                        <input type="text" name="type" class="form-control"
+                                                                            value= "today-complete" hidden id="type">
                                                                 @endswitch
                                                             @else
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio" name="radio" value="morning_first_select">
-                                                                    <label class="form-check-label">1:30 Number</label>
+                                                                    <label class="form-check-label">Morning First Number</label>
                                                                 </div>
                                                                 <input type="text" name="type" class="form-control"
-                                                                value= "morning_first_select" hidden>
+                                                                value= "morning_first_select" hidden id="type">
                                                                 {{-- <div class="form-check">
                                                                 <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
                                                                 <label class="form-check-label">2:00 Number</label>
@@ -105,7 +112,7 @@
                                                     </div>
                                                     <!-- /.card-body -->
                                                     <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary float-right ml-2">Upload</button>
+                                                        <button type="submit" class="btn btn-primary float-right ml-2" id="uploadButton">Upload</button>
                                                         <a href="{{ url()->previous() }}" class="btn btn-default float-right">Back</a>
                                                     </div>
                                                 </form>
@@ -137,8 +144,14 @@
 @section('scripts')
 
 <script>
+  
     $(function () {
-        
+        var type = document.getElementById("type").value;
+        if(type == "today-complete"){
+            document.getElementById("inputStock").disabled = true; 
+            document.getElementById("uploadButton").disabled = true; 
+        }
+       
       /*   $.validator.setDefaults({
             submitHandler: function () {
                 alert("Form successful submitted!");
