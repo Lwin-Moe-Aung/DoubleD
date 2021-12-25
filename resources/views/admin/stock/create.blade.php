@@ -43,8 +43,8 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Stock</label>
-                                                            <input type="text" name="stock" class="form-control"
-                                                                id="inputStock" placeholder="Enter Stock Number" required>
+                                                            <input type="number" name="stock" class="form-control"
+                                                                id="inputStock" placeholder="Enter Stock Number" >
                                                            
                                                         </div>
                                                         <div class="form-group">
@@ -152,22 +152,28 @@
             document.getElementById("uploadButton").disabled = true; 
         }
        
-      /*   $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        }); */
-       /*  $('#stockForm').validate({
+        // $.validator.setDefaults({
+        //     submitHandler: function () {
+        //         alert("Form successful submitted!");
+        //     }
+        // });
+        $('#stockForm').validate({
             rules: {
                 stock: {
                     required: true,
                     number: true,
+                    minlength: 8,
+                    maxlength: 8
                 }
             },
             messages: {
                 stock: {
-                    required: "Please enter a Stock number",
-                    number: "Please enter a vaild Number"
+                    required: "နံပါတ်များကို ရိုက်ထည့် ရန်လိုအပ့်သည်။",
+                    number: "နံပါတ် ဂဏန်းများကိုသာ ရိုက်ထည့်ပေးပါ",
+                    minlength: "နံပါတ် ၈ လုံးထက်နည်းနေ ပါသည်။",
+                    maxlength: "နံပါတ် ၈ လုံးထက် များနေ ပါသညါ။"
+
+                    
                 }
             },
             errorElement: 'span',
@@ -181,7 +187,7 @@
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
             }
-        });  */
+        }); 
     }); 
 </script>
 @endsection

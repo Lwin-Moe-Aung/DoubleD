@@ -43,8 +43,8 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Tip</label>
-                                                            <input type="text" name="tip" class="form-control"
-                                                                id="inputTip" placeholder="Enter Tip Numbers" required>
+                                                            <input type="number" name="tip" class="form-control"
+                                                                id="inputTip" placeholder="Enter Tip Numbers" >
                                                            
                                                         </div>
                                                         <div class="form-check">
@@ -94,22 +94,22 @@
 <script>
     $(function () {
         
-      /*   $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        }); */
-       /*  $('#stockForm').validate({
+    
+        $('#stockForm').validate({
             rules: {
-                stock: {
+                tip: {
                     required: true,
                     number: true,
+                    minlength: 3,
+                    maxlength: 3
                 }
             },
             messages: {
-                stock: {
-                    required: "Please enter a Stock number",
-                    number: "Please enter a vaild Number"
+                tip: {
+                    required: "နံပါတ်များကို ရိုက်ထည့် ရန်လိုအပ့်သည်။",
+                    number: "နံပါတ် ဂဏန်းများကိုသာ ရိုက်ထည့်ပေးပါ",
+                    minlength: "နံပါတ် ၃ လုံးထက်နည်းနေ ပါသည်။",
+                    maxlength: "နံပါတ် ၃ လုံးထက် များနေ ပါသညါ။"
                 }
             },
             errorElement: 'span',
@@ -123,7 +123,7 @@
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
             }
-        });  */
+        });
     }); 
 </script>
 @endsection

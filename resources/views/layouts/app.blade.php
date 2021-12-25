@@ -199,6 +199,8 @@
 {{-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script> --}}
 {{-- <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script> --}}
+<script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>
 
  <!-- datatable -->
 <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
