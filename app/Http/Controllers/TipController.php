@@ -6,6 +6,7 @@ use App\Tip;
 use Illuminate\Http\Request;
 use App\Events\TipsEvent;
 use DataTables;
+use Carbon\Carbon;
 
 class TipController extends Controller
 {
@@ -19,6 +20,10 @@ class TipController extends Controller
         if ($request->ajax()) {
             $data = Tip::select('*')->orderBy('created_at', 'desc');
             return Datatables::of($data)
+                    ->editColumn('is_morning', function ($request) {
+                        $is_morning = $request->is_morning ? "Morning Tip" : "Evening Tip";
+                        return $is_morning; // human readable format
+                    })
                     ->editColumn('created_at', function ($request) {
                         return $request->created_at->format('m/d/Y h:i:s A'); // human readable format
                     })
@@ -58,9 +63,15 @@ class TipController extends Controller
         $request->validate([
             'tip' => 'required',
         ]);
+        $is_morning = $request->radio == "is_evening" ? false: true;
+
+        $deletedRows = Tip::where('is_morning', $is_morning)
+            ->whereDate('created_at', '=', Carbon::now())
+            ->delete();
+
         $tip = new Tip();
         $tip->tip = $request->tip;
-        $tip->is_morning = $request->radio == "is_evening" ? false: true;
+        $tip->is_morning = $is_morning;
         if($tip->save()){
             try {
                 $data['tips'] = $tip->tip;
@@ -71,9 +82,11 @@ class TipController extends Controller
                 return redirect()->route('tips.index')
                 ->with('success','Tip created successfully.');
             } catch (\Exception $e) {
-                $tip::delete();
+                $tip->delete();
             }
         }
+        return redirect()->route('tips.index')
+        ->with('success','Tip created successfully.');
     }
 
     /**
