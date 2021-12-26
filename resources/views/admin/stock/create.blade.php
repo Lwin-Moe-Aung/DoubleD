@@ -44,7 +44,7 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Stock</label>
                                                             <input type="number" name="stock" class="form-control"
-                                                                id="inputStock" placeholder="Enter Stock Number" >
+                                                                id="inputStock" placeholder="Enter Stock Number">
                                                            
                                                         </div>
                                                         <div class="form-group">
