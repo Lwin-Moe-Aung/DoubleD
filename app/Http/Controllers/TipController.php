@@ -30,8 +30,6 @@ class TipController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($data){
                             $btn = '<button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#DeleteTipModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-                        //    $btn = '<a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
-    
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -80,13 +78,13 @@ class TipController extends Controller
                 
                 event(new TipsEvent($data));
                 return redirect()->route('tips.index')
-                ->with('success','Tip created successfully.');
+                ->with('success','Tip အသစ်ထည့်သွင်းခြင်းအောင်မြင်ပါသည်။');
             } catch (\Exception $e) {
                 $tip->delete();
             }
         }
         return redirect()->route('tips.index')
-        ->with('success','Tip created successfully.');
+        ->with('error','error တစ်ခုခုရှိနေသည်။ပြန်လည်လုပ် ဆောင်ပေးပါရှင့်။');
     }
 
     /**
@@ -133,6 +131,6 @@ class TipController extends Controller
     {
         $tip = new Tip;
         $tip->deleteData($id);
-        return response()->json(['success'=>'Article deleted successfully']);
+        return response()->json(['success'=>'Tip deleted successfully']);
     }
 }

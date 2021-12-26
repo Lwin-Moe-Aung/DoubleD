@@ -74,7 +74,7 @@ class PositionController extends Controller
         $position->update($request->all());
   
         return redirect()->route('positions.index')
-                        ->with('success','Position updated successfully');
+                        ->with('success','Position အသစ်ပြင်ဆင်ခြင်းအောင်မြင်ပါသည်။');
     }
 
     /**

@@ -1,11 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container-fluid">
         <section class="content">
             <div class="container-fluid">
+                <div class="alert alert-success" id="alert-success" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert">×</button>    
+                    <strong>stock ဖျက်ချင်းအောင်မြင်ပါတယ်ရှင့်။</strong>
+                </div>
+                <div class="alert alert-info" id="alert-info" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert">×</button>    
+                    <strong>ဒီ stock နံပါတ်သည် ထွက်ပီးသားနံပါတ်ဖြစ်နေသောကြောင့် ဖျက်၍မရနိုင်ပါရှင့်။</strong>
+                </div>
                 <div class="row">
-                    <div class="col-12 " style="overflow-x: scroll;">
+                    <div class="col-12">
+                       
                         <!-- /.card-header -->
                         <section class="content overflow-auto">
                             <div class="container-fluid">
@@ -62,6 +72,28 @@
             <!-- /.container-fluid -->
           </section>
     </div>
+
+     <!-- Delete Article Modal -->
+     <div class="modal" id="DeleteStockModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Stock ဖျက်မည်။</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h4>Stock ကိုဖျက်မှာ သေချာပါသလားရှင့်?</h4>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="SubmitDeleteStockForm">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -70,26 +102,14 @@
     $(function () {
         
         // let ip_address = '127.0.0.1';
-        let ip_address = '18.183.164.200';
-        let socket_port = '8005';
-        let socket = io(ip_address + ':' + socket_port);
-        socket.on("private", function (message)
-            {
-                console.log(message);
-            });
-        // $("#stockDataTable").DataTable({
-        //         "responsive": true, "lengthChange": false, "autoWidth": false,
-        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        //     $('#example2').DataTable({
-        //         "paging": true,
-        //         "lengthChange": false,
-        //         "searching": false,
-        //         "ordering": true,
-        //         "info": true,
-        //         "autoWidth": false,
-        //         "responsive": true,
+        // let ip_address = '18.183.164.200';
+        // let socket_port = '8005';
+        // let socket = io(ip_address + ':' + socket_port);
+        // socket.on("private", function (message)
+        //     {
+        //         console.log(message);
         //     });
+       
         var table = $('#stockDataTable').DataTable({
             responsive: true, "lengthChange": false, "autoWidth": false,
             // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
@@ -107,7 +127,40 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
         });
-        
+        //delete
+        var deleteID;
+        $('body').on('click', '#getDeleteId', function(){
+            deleteID = $(this).data('id');
+        })
+        $('#SubmitDeleteStockForm').click(function(e) {
+            e.preventDefault();
+            var id = deleteID;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "stock-delete/"+id,
+                method: 'POST',
+                success: function(result) {
+                    $('.alert-success').hide();
+                    $('.alert-danger').hide();
+                    $('#alert-success').show();
+                    $('#alert-info').hide();
+                    $('#stockDataTable').DataTable().ajax.reload();
+                    $('#DeleteStockModal').modal('toggle');
+                },
+                error: function(result) {
+                    $('.alert-success').hide();
+                    $('.alert-danger').hide();
+                    $('#alert-success').hide();
+                    $('#alert-info').show();
+                    $('#DeleteStockModal').modal('toggle');
+                }
+            });
+        });
+        //end delete
     }); 
 </script>
 @endsection

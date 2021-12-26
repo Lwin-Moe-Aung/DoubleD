@@ -5,7 +5,15 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 " style="overflow-x: scroll;">
+                    <div class="col-12 ">
+                        <div class="alert alert-success" id="alert-success" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert">×</button>    
+                            <strong>Tip ဖျက်ချင်းအောင်မြင်ပါတယ်ရှင့်။</strong>
+                        </div>
+                        <div class="alert alert-info" id="alert-info" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert">×</button>    
+                            <strong>Tip ဖျက်၍မရနိုင်ပါပြန်လည်ကြိုးစားကြည့်ပေးပါရှင့်။</strong>
+                        </div>
                         <!-- /.card-header -->
                         <section class="content overflow-auto">
                             <div class="container-fluid">
@@ -67,12 +75,12 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Tip Delete</h4>
+                    <h4 class="modal-title">Tip ဖျက်မည်။</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <h4>Are you sure want to delete this Tip?</h4>
+                    <h4>Tip ကိုဖျက်မှာ သေချာပါသလားရှင့်?</h4>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -133,10 +141,19 @@
                 url: "tip-delete/"+id,
                 method: 'POST',
                 success: function(result) {
-                    
-                        $('#tipDataTable').DataTable().ajax.reload();
-                        $('#DeleteTipModal').modal('toggle');
-                   
+                    $('.alert-success').hide();
+                    $('.alert-danger').hide();
+                    $('#alert-success').show();
+                    $('#alert-info').hide();
+                    $('#tipDataTable').DataTable().ajax.reload();
+                    $('#DeleteTipModal').modal('toggle');
+                },
+                error: function(result) {
+                    $('.alert-success').hide();
+                    $('.alert-danger').hide();
+                    $('#alert-success').hide();
+                    $('#alert-info').show();
+                    $('#DeleteTipModal').modal('toggle');
                 }
             });
         });

@@ -176,7 +176,8 @@
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
-            @yield('content')
+          @include('admin/flash/flash-message')
+          @yield('content')
         </section>
     </div>
 

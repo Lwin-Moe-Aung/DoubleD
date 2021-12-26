@@ -25,16 +25,13 @@ class StockController extends Controller
                         return $request->created_at->format('m/d/Y h:i:s A'); // human readable format
                     })
                     ->addIndexColumn()
-                    ->addColumn('action', function($row){
-     
-                           $btn = '<a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
-    
-                            return $btn;
+                    ->addColumn('action', function($data){
+                        $btn = '<button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#DeleteStockModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                        return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        
         return view("admin.stock.index");
     }
 
@@ -152,11 +149,13 @@ class StockController extends Controller
                
                 event(new StockEvent($data));
                 return redirect()->route('stocks.index')
-                ->with('success','Stock created successfully.');
+                ->with('success','Stock အသစ်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။');
             } catch (\Exception $e) {
                 $ss->delete();
                
             }
+            return redirect()->route('stocks.index')
+                ->with('error','Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
         }
        
     }
@@ -203,6 +202,17 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $selectedLog = SelectedLog::where('mfs_stock_id', $id)
+            ->orWhere('mss_stock_id', $id)
+            ->orWhere('efs_stock_id', $id)
+            ->orWhere('ess_stock_id', $id)
+            ->first();
+        if($selectedLog != null){
+            return response()->json(['error'=>'Stock cannot deleted'],500);
+        }
+        
+        if(Stock::find($id)->delete()){
+            return response()->json(['success'=>'Stock deleted successfully']);
+        }
     }
 }
