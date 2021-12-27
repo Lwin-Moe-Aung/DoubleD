@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getting-stock', [App\Http\Controllers\API\StockController::class, 'gettingStock']);
 Route::get('/getting-tips', [App\Http\Controllers\API\TipsController::class, 'gettingTips']);
 Route::get('/getting-history/{day}', [App\Http\Controllers\API\StockController::class, 'getHistory']);
+Route::post('/register', [App\Http\Controllers\API\CustomerController::class, 'register']);
+Route::post('/live-chat', [App\Http\Controllers\API\LiveChatController::class, 'liveChat']);

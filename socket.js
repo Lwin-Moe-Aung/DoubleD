@@ -22,11 +22,11 @@ redis.subscribe('stock-upload-channel', function() {
     console.log('subscribed to private channel');
 });
 redis.subscribe('tip-upload-channel', function() {
-    console.log('subscribed to private channel');
+    console.log('subscribed to tip-upload channel');
 });
-// redis.subscribe('private-channel', function() {
-//     console.log('subscribed to private channel');
-// });
+redis.subscribe('livechat-channel', function() {
+    console.log('subscribed to livechat channel');
+});
 
 redis.on('message', function(channel, message) {
     message = JSON.parse(message);
@@ -38,6 +38,13 @@ redis.on('message', function(channel, message) {
         io.emit("private", data);
     }
     if (channel == 'tip-upload-channel') {
+        let data = message.data.data;
+        let event = message.event;
+        console.log(channel + ':' + event);
+        console.log(data);
+        io.emit(channel, data);
+    }
+    if (channel == 'livechat-channel') {
         let data = message.data.data;
         let event = message.event;
         console.log(channel + ':' + event);

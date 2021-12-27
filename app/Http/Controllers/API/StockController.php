@@ -123,7 +123,8 @@ class StockController extends Controller
         // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
 
         //data2
-        $latestStock = $this->getLatestStock();
+        $latestStock = $this->getLatestStockByDate($selected_log->date);
+        // dd($latestStock);
         $data2["stock"] =  $latestStock->stock;
         $data2["selected_stock1"] = [
             "selected_stock1" => $selected_log->evening_first_select,
@@ -147,12 +148,18 @@ class StockController extends Controller
 
     public function getLatestStock()
     {  
-        // $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
-
         $stock = Stock::whereDate('created_at', '=', date('Y-m-d'))
                     ->orderBy('created_at', 'desc')
                     ->first();
-        
+        return $stock;
+    }
+
+    public function getLatestStockByDate(String $date)
+    {  
+        $stock = Stock::whereDate('created_at', '=', $date)
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+                   
         return $stock;
     }
 
@@ -173,7 +180,7 @@ class StockController extends Controller
         // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
 
         //data2
-        $latestStock = $this->getLatestStock($selected_log->mss_stock_id);
+        $latestStock = $this->getLatestStockByDate($selected_log->date);
         if($latestStock->id == $selected_log->mss_stock_id){
             $data =[
                 $data1
@@ -202,7 +209,7 @@ class StockController extends Controller
     public function morningFirstSelect(SelectedLog $selected_log)
     {  
         //data 1
-        $latestStock = $this->getLatestStock();
+        $latestStock = $this->getLatestStockByDate($selected_log->date);
 
         $data1["stock"] = $latestStock->stock;
         $data1["selected_stock1"] = [

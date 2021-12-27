@@ -102,9 +102,13 @@
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
         socket.on("tip-upload-channel", function (message)
-            {
-                console.log(message);
-            });
+        {
+            console.log(message);
+        });
+        socket.on("livechat-channel", function (message)
+        {
+            console.log(message);
+        });
       
         var table = $('#tipDataTable').DataTable({
             responsive: true, "lengthChange": false, "autoWidth": false,
