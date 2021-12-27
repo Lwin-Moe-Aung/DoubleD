@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\LiveChatEvent;
 use App\LiveChat;
 use App\Customer;
-
+use Carbon\Carbon;
 
 class LiveChatController extends Controller
 {
@@ -43,4 +43,24 @@ class LiveChatController extends Controller
 
     }
   
+    public function index(){
+
+        $livechat = LiveChat::orderBy('created_at', 'desc')
+                ->paginate(20)
+                ->toArray();
+               
+        if(empty($livechat["data"])){
+            return response()->json([]);
+        } 
+        foreach($livechat["data"] as $key=>$liveData){
+            $customer = Customer::find($liveData["customer_id"]);
+            //  dd($liveData["created_at"]);
+            $data[$key]["message"] = $liveData["message"];
+            $data[$key]["customer_name"] = $customer->name;
+            $data[$key]["customer_photo"] = $customer->image;
+            $data[$key]["date"] = $liveData["created_at"];
+        }
+        return response()->json($data,200);
+
+    }
 }
