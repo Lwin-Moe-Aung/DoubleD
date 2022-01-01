@@ -176,6 +176,7 @@
                 if($.isEmptyObject(data.error)){
                     $('#mailForm').trigger("reset");
                     $('#ajaxModel').modal('hide');
+                    location.reload();
                     // table.draw();
                 }else{
                     printErrorMsg(data.error);
