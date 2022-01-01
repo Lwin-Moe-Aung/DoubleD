@@ -34,7 +34,7 @@ class SubAdminController extends Controller
                     ->make(true);
         }
         
-        return view("admin.subadmin.index");
+        return view("admin.subAdmin.index");
     }
 
     /**
@@ -44,7 +44,7 @@ class SubAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.subadmin.create');
+        return view('admin.subAdmin.create');
     }
 
     /**
