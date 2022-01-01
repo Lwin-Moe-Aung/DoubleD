@@ -154,9 +154,10 @@ class StockController extends Controller
                 $ss->delete();
                
             }
-            return redirect()->route('stocks.index')
-                ->with('error','Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
+            
         }
+        return redirect()->route('stocks.index')
+                ->with('error','Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
        
     }
 

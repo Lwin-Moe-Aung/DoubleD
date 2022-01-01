@@ -11,7 +11,7 @@
           <img src="{{ asset('images/admin/admin.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Owner</a>
+          <a href="#" class="d-block">{{ auth()->user()->name }}</a>
         </div>
       </div>
 
@@ -40,8 +40,8 @@
               
               </p>
             </a>
-          
           </li>
+          @if (auth()->user()->role == "Admin")
             <li class="nav-item">
               <a href="{{ route('positions.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
@@ -52,29 +52,32 @@
               </a>
             
             </li>
-          {{-- <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
-              <p>
-                Create Admin
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/validation.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
+           
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tree"></i>
+                <p>
+                  Create SubAdmin
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('sub-admins.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('sub-admins.create') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
+         
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
@@ -121,7 +124,7 @@
               </li>
             </ul>
           </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -143,7 +146,7 @@
                 </a>
               </li>
             </ul>
-          </li> --}}
+          </li>
         
       </nav>
       <!-- /.sidebar-menu -->

@@ -13,12 +13,12 @@
                                 <div class="container-fluid">
                                     <div class="row mb-2">
                                         <div class="col-sm-6">
-                                            <h1>Tip</h1>
+                                            <h1>Sub Admin</h1>
                                         </div>
                                         <div class="col-sm-6">
                                             <ol class="breadcrumb float-sm-right">
-                                                <li class="breadcrumb-item"><a href="#">Tip</a></li>
-                                                <li class="breadcrumb-item active">Add</li>
+                                                <li class="breadcrumb-item"><a href="#">Sub Admin</a></li>
+                                                <li class="breadcrumb-item active">Edit</li>
                                             </ol>
                                         </div>
                                     </div>
@@ -33,27 +33,46 @@
                                             <!-- jquery validation -->
                                             <div class="card card-primary">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Add new Tips</h3>
+                                                    <h3 class="card-title">Add new Sub Admin</h3>
                                                 </div>
+                                                @if($errors->any())
+                                                    <div class="alert alert-danger">
+                                                        <p><strong>Opps Something went wrong</strong></p>
+                                                        <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                                 <!-- /.card-header -->
                                                 <!-- form start -->
-                                                <form action="{{ route('tips.store') }}" method="POST" id="stockForm">
+                                                <form action="{{ route('sub-admins.store') }}" method="POST" id="subAdminForm">
                                                     @csrf
                                                    
                                                     <div class="card-body">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Tip</label>
-                                                            <input type="number" name="tip" class="form-control"
-                                                                id="inputTip" placeholder="Enter Tip Numbers" >
-                                                           
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="radio" value="is_morning" checked>
-                                                            <label class="form-check-label">Is Morning</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="radio" value="is_evening">
-                                                            <label class="form-check-label">Is Evening</label>
+                                                        <div class="card-body">
+                                                            <div class="form-group">
+                                                                <label for="inputName">Name</label>
+                                                                <input type="text" name="name" class="form-control" 
+                                                                    id="inputName" placeholder="Enter name" value="{{Request::old('name')}}">
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label for="inputEmail">Email address</label>
+                                                                <input type="email" name="email" class="form-control" 
+                                                                    id="inputEmail" placeholder="Enter email" value="{{Request::old('email')}}">
+                                                              </div>
+                                                            <div class="form-group">
+                                                                <label for="inputPassword">Password</label>
+                                                                <input type="password" name="password" class="form-control"
+                                                                    id="inputPassword" placeholder="Enter Password" value="{{Request::old('password')}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="inputConfirmPassword">Conirm Password</label>
+                                                                <input type="password" name="confirm_password" class="form-control"
+                                                                    id="inputConfirmPassword" placeholder="Enter Confirm Password" value="{{Request::old('confirm_password')}}">
+                                                            </div>
+                    
                                                         </div>
                 
                                                     </div>
@@ -97,19 +116,35 @@
     
         $('#stockForm').validate({
             rules: {
-                tip: {
+                name: {
+                    required: true
+                },
+                email: {
                     required: true,
-                    number: true,
-                    minlength: 3,
-                    maxlength: 3
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 6
                 }
+
             },
             messages: {
-                tip: {
-                    required: "နံပါတ်များကို ရိုက်ထည့် ရန်လိုအပ့်သည်။",
-                    number: "နံပါတ် ဂဏန်းများကိုသာ ရိုက်ထည့်ပေးပါ",
-                    minlength: "နံပါတ် ၃ လုံးထက်နည်းနေ ပါသည်။",
-                    maxlength: "နံပါတ် ၃ လုံးထက် များနေ ပါသညါ။"
+                name: {
+                    required: "နာမည်ထည့် ရန်လိုအပ့်ပါသည်။",
+                },
+                email: {
+                    required: "email ထည့် ရန်လိုအပ့်သည်။",
+                },
+                password: {
+                    required: "password ထည့် ရန်လိုအပ့်သည်။",
+                },
+                confirm_password: {
+                    required: "confirm password ထည့် ရန်လိုအပ့်သည်။",
                 }
             },
             errorElement: 'span',

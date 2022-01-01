@@ -27,7 +27,9 @@ redis.subscribe('tip-upload-channel', function() {
 redis.subscribe('livechat-channel', function() {
     console.log('subscribed to livechat channel');
 });
-
+redis.subscribe('notification-channel', function() {
+    console.log('subscribed to notification-channel');
+});
 redis.on('message', function(channel, message) {
     message = JSON.parse(message);
     if (channel == 'stock-upload-channel') {
@@ -50,6 +52,16 @@ redis.on('message', function(channel, message) {
         console.log(channel + ':' + event);
         console.log(data);
         io.emit(channel, data);
+    }
+    if (channel == 'notification-channel') {
+        let data = message.data.data;
+        let event = message.event;
+        // console.log(channel + ':' + event);
+        // console.log(data);
+        data.forEach(function(dd) {
+            // console.log(channel+'-'+dd.id);
+            io.emit(channel+'-'+dd.id, dd.noti_count);
+        })
     }
 });
 

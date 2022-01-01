@@ -47,8 +47,6 @@
                                                                 id="inputItem" placeholder="Enter Message...." required>
                                                            
                                                         </div>
-                                                       
-                
                                                     </div>
                                                     <!-- /.card-body -->
                                                     <div class="card-footer">
