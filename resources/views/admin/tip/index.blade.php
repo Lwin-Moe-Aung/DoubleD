@@ -98,7 +98,8 @@
     $(function () {
         
         // let ip_address = '127.0.0.1';
-        let ip_address = '18.183.164.200';
+        // let ip_address = '18.183.164.200';
+        let ip_address = '18.179.4.232';
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
         socket.on("tip-upload-channel", function (message)
