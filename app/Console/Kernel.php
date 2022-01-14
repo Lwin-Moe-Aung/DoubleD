@@ -16,6 +16,9 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AutoGenerateMorningStock::class,
         Commands\AutoGenerateEveningStock::class,
+        Commands\AutoDeleteLiveChat::class,
+        Commands\AutoDeleteStock::class,
+
     ];
 
     /**
@@ -35,6 +38,13 @@ class Kernel extends ConsoleKernel
                 ->weekdays()
                 ->timezone('Asia/Yangon')
                 ->between("14:00","17:30");
+
+        $schedule->command('delete-live-chat')
+                ->timezone('Asia/Yangon')
+                ->weekly();
+        $schedule->command('delete-stock')
+                ->timezone('Asia/Yangon')
+                ->weekly();
     }
 
     /**
