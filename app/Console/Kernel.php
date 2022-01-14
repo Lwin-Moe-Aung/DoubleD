@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('auto-generate-stock')
                 ->weekdays()
                 ->timezone('Asia/Yangon')
-                ->between("13:50","13:59");
+                ->between("14:31","14:33");
     }
 
     /**
