@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\AutoGenerateStock::class,
+        Commands\AutoGenerateMorningStock::class,
+        Commands\AutoGenerateEveningStock::class,
     ];
 
     /**
@@ -25,10 +26,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('auto-generate-stock')
+        $schedule->command('auto-generate-morning-stock')
                 ->weekdays()
                 ->timezone('Asia/Yangon')
-                ->between("14:34","14:36");
+                ->between("15:15","15:20");
+
+        $schedule->command('auto-generate-evening-stock')
+                ->weekdays()
+                ->timezone('Asia/Yangon')
+                ->between("15:25","15:30");
     }
 
     /**
