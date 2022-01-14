@@ -26,8 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('auto-generate-stock')
-                ->everyMinute()
-                ->runInBackground();
+                ->weekdays()
+                ->timezone('Asia/Yangon')
+                ->between("13:50","13:59");
     }
 
     /**

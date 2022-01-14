@@ -4,8 +4,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
     cors: { 
         // origin: "http://localhost:8000",
-        // origin: "http://18.183.164.200",
-        origin: "http://18.179.4.232",
+        origin: "http://3.112.44.242",
         methods: ["GET", "POST"],
         credentials: true
     },
