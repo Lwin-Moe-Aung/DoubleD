@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('auto-generate-morning-stock')
-                // ->weekdays()
+                ->weekdays()
                 ->timezone('Asia/Yangon')
-                ->between("09:00","12:00");
+                ->between("09:00","11:30");
 
         $schedule->command('auto-generate-evening-stock')
                 ->weekdays()
