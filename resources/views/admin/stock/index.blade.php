@@ -102,7 +102,7 @@
     $(function () {
         
         // let ip_address = '127.0.0.1';
-        let ip_address = '18.183.209.242';
+        let ip_address = '13.113.153.186';
   
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
