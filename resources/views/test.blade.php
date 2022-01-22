@@ -87,7 +87,7 @@ div#sea {
   height: 200px;
   left: 50%;
   margin-left: -150px;
-  bottom: 700px;
+  bottom: 410px;
   z-index: 10;
 }
 .giftbox > div {
@@ -511,18 +511,18 @@ div#sea {
             
             <div class="row">
                 <span>S</span>
-                <span>H</span>
-                <span>I</span>
-                <span>N</span>
-                <span>H</span>
-                <span>N</span>
-                <span>I</span>
-                <span>N</span>
-                <span>G</span>
+                <span>h</span>
+                <span>i</span>
+                <span>n</span>
+                <span>h</span>
+                <span>n</span>
+                <span>i</span>
+                <span>n</span>
+                <span>g</span>
                 <span> &nbsp;</span>
                 <span>S</span>
-                <span>A</span>
-                <span>N</span>
+                <span>a</span>
+                <span>n</span>
             </div>
             </div>
         </div>
