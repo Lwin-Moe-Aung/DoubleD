@@ -500,12 +500,13 @@ div#sea {
                 
             </div>
             <div class="row">
+                <span>M</span>
+                <span>O</span>
+                <span>R</span>
                 <span>N</span>
                 <span>I</span>
+                <span>N</span>
                 <span>G</span>
-                <span>H</span>
-                <span>T</span>
-                
              </div>
             
             <div class="row">
