@@ -507,6 +507,10 @@ div#sea {
                 <span>I</span>
                 <span>N</span>
                 <span>G</span>
+                <span>H</span>
+                <span>E</span>
+                <span>L</span>
+                <span>O</span>
              </div>
             
             <div class="row">
