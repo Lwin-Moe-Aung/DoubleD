@@ -74,8 +74,8 @@ class AutoGenerateEveningStock extends Command
                 $data['stock'] = (string)$randomNumber;
                 $data['selected_stock'] = $selected_stock;
                 $data['is_morning'] = false;
-                $data['date'] = date('m/d/Y h:i:s A');
-              
+                $data['date'] = \Carbon\Carbon::now()->toFormattedDateString();	
+                $data['time'] = \Carbon\Carbon::now()->format('h:i:s A');
                 event(new StockEvent($data));
                
             } catch (\Exception $e) {

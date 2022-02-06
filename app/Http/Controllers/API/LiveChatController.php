@@ -29,7 +29,7 @@ class LiveChatController extends Controller
                 $customer = Customer::find($request->customer_id);
                 $data["message"] = $livechat->message;
                 $data["customer_id"] = $request->customer_id;
-                $data["date"] = $livechat->created_at->format('Y-m-d H:i:s');
+                $data["date"] = \Carbon\Carbon::parse($livechat->created_at)->diffForHumans();	
                 $data["customer_name"] = $customer->name;
                 $data["customer_photo"] = $customer->image;
 
@@ -40,27 +40,23 @@ class LiveChatController extends Controller
             }
         }
         return response()->json(['fail'=>'Message cannot sent']);
-
     }
   
     public function index(){
-
         $livechat = LiveChat::orderBy('created_at', 'desc')
-                ->paginate(20)
+                ->paginate(10)
                 ->toArray();
-               
         if(empty($livechat["data"])){
             return response()->json([]);
         } 
         foreach($livechat["data"] as $key=>$liveData){
             $customer = Customer::find($liveData["customer_id"]);
             //  dd($liveData["created_at"]);
-            $data[$key]["message"] = $liveData["message"];
-            $data[$key]["customer_name"] = $customer->name;
-            $data[$key]["customer_photo"] = $customer->image;
-            $data[$key]["date"] = $liveData["created_at"];
+            $livechat["data"][$key]["message"] = $liveData["message"];
+            $livechat["data"][$key]["customer_name"] = $customer->name;
+            $livechat["data"][$key]["customer_photo"] = $customer->image;
+            $livechat["data"][$key]["date"] = \Carbon\Carbon::parse($liveData["created_at"])->diffForHumans();	
         }
-        return response()->json($data,200);
-
+        return response()->json($livechat,200);
     }
 }

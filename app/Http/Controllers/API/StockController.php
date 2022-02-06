@@ -35,7 +35,9 @@ class StockController extends Controller
                 ];
                 $data["is_morning"] = true;
                 // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
-                $data["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+                // $data["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+                $data['date'] = \Carbon\Carbon::parse($latestStock->created_at)->toFormattedDateString();	
+                $data['time'] = \Carbon\Carbon::parse($latestStock->created_at)->format('h:i:s A');
                 $data = [
                     $data
                 ];
@@ -81,8 +83,9 @@ class StockController extends Controller
             "stock2_stop" => true
         ];
         $data1["is_morning"] = true;
-        $data1["date"] = $selected_log->morning_ss_time;
-        // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
+        // $data1["date"] = $selected_log->morning_ss_time;
+        $data1['date'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->toFormattedDateString();	
+        $data1['time'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->format('h:i:s A');
 
         //data2
         $data2["stock"] = $this->getStockById($selected_log->ess_stock_id);
@@ -95,9 +98,9 @@ class StockController extends Controller
             "stock2_stop" => true
         ];
         $data2["is_morning"] = false;
-        // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
-        $data2["date"] = $selected_log->evening_ss_time;
-
+        // $data2["date"] = $selected_log->evening_ss_time;
+        $data2['date'] = \Carbon\Carbon::parse($selected_log->evening_ss_time)->toFormattedDateString();	
+        $data2['time'] = \Carbon\Carbon::parse($selected_log->evening_ss_time)->format('h:i:s A');
         
         $data =[
             $data1,
@@ -119,9 +122,9 @@ class StockController extends Controller
             "stock2_stop" => true
         ];
         $data1["is_morning"] = true;
-        $data1["date"] = $selected_log->morning_ss_time;
-        // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
-
+        // $data1["date"] = $selected_log->morning_ss_time;
+        $data1['date'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->toFormattedDateString();	
+        $data1['time'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->format('h:i:s A');
         //data2
         $latestStock = $this->getLatestStockByDate($selected_log->date);
         // dd($latestStock);
@@ -135,9 +138,9 @@ class StockController extends Controller
             "stock2_stop" => false
         ];
         $data2["is_morning"] = false;
-        // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
-        $data2["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
-
+        // $data2["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+        $data2['date'] = \Carbon\Carbon::parse($latestStock->created_at)->toFormattedDateString();	
+        $data2['time'] = \Carbon\Carbon::parse($latestStock->created_at)->format('h:i:s A');
         
         $data =[
             $data1,
@@ -176,7 +179,9 @@ class StockController extends Controller
             "stock2_stop" => true
         ];
         $data1["is_morning"] = true;
-        $data1["date"] = $selected_log->morning_ss_time;
+        // $data1["date"] = $selected_log->morning_ss_time;
+        $data1['date'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->toFormattedDateString();	
+        $data1['time'] = \Carbon\Carbon::parse($selected_log->morning_ss_time)->format('h:i:s A');
         // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
 
         //data2
@@ -198,7 +203,9 @@ class StockController extends Controller
         ];
         $data2["is_morning"] = false;
         // $data2["date"] = $selected_log->evening_ss_time->format('m/d/Y h:i:s A');
-        $data2["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+        // $data2["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+        $data2['date'] = \Carbon\Carbon::parse($latestStock->created_at)->toFormattedDateString();	
+        $data2['time'] = \Carbon\Carbon::parse($latestStock->created_at)->format('h:i:s A');
         $data =[
             $data1,
             $data2
@@ -221,7 +228,11 @@ class StockController extends Controller
             "stock2_stop" => false
         ];
         $data1["is_morning"] = true;
-        $data1["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
+
+        $data1['date'] = \Carbon\Carbon::parse($latestStock->created_at)->toFormattedDateString();	
+        $data1['time'] = \Carbon\Carbon::parse($latestStock->created_at)->format('h:i:s A');
+
+        // $data1["date"] =  $latestStock->created_at->format('m/d/Y h:i:s A');
         // $data1["date"] = $selected_log->morning_ss_time->format('m/d/Y h:i:s A');
         
         $data =[
@@ -247,7 +258,7 @@ class StockController extends Controller
         $return_data = [];
         foreach($data as $key => $dd) {
 
-            $return_data[$key]["date"] =  $dd->date;
+            $return_data[$key]["date"] = \Carbon\Carbon::parse($dd->date)->toFormattedDateString();	
             $return_data[$key]["stock"]["morning"]["stock"] = $this->getStockById($dd->mss_stock_id);
             $return_data[$key]["stock"]["morning"]["selected_stock1"] = $dd->morning_first_select;
             $return_data[$key]["stock"]["morning"]["selected_stock2"] = $dd->morning_second_select;

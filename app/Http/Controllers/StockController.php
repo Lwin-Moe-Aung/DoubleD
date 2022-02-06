@@ -145,8 +145,9 @@ class StockController extends Controller
                 $data['stock'] = $stock;
                 $data['selected_stock'] = $selected_stock;
                 $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true :false;
-                $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
-               
+                // $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
+                $data['date'] = \Carbon\Carbon::parse($ss->created_at)->toFormattedDateString();	
+                $data['time'] = \Carbon\Carbon::parse($ss->created_at)->format('h:i:s A');
                 event(new StockEvent($data));
                 return redirect()->route('stocks.index')
                 ->with('success','Stock အသစ်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။');

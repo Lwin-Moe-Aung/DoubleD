@@ -74,7 +74,9 @@ class TipController extends Controller
             try {
                 $data['tips'] = $tip->tip;
                 $data['is_morning'] = $tip->is_morning;
-                $data['date'] = $tip->created_at->format('m/d/Y h:i:s A');
+                // $data['date'] = $tip->created_at->format('m/d/Y h:i:s A');
+                $data['date'] = \Carbon\Carbon::parse($tip->created_at)->toFormattedDateString();	
+                $data['time'] = \Carbon\Carbon::parse($tip->created_at)->format('h:i:s A');
                 
                 event(new TipsEvent($data));
                 return redirect()->route('tips.index')

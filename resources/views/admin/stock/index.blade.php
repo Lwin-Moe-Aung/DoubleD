@@ -100,17 +100,35 @@
 
 <script>
     $(function () {
-        
+        //testing socket data
         // let ip_address = '127.0.0.1';
         let ip_address = '13.113.153.186';
   
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
         socket.on("private", function (message)
-            {
-                console.log(message);
-            });
-       
+        {
+            console.log('stock upload channel');
+            console.log(message);
+        });
+        socket.on("livechat-channel", function (message)
+        {
+            console.log('livechat channel');
+            console.log(message);
+        });
+        socket.on("tip-upload-channel", function (message)
+        {
+            console.log('tip-upload-channel');
+            console.log(message);
+        });
+        socket.on("notification-channel", function (message)
+        {
+            console.log('notification-channel');
+            console.log(message);
+        });
+
+        //testing socket data
+        
         var table = $('#stockDataTable').DataTable({
             responsive: true, "lengthChange": false, "autoWidth": false,
             // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
