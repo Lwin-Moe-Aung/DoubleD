@@ -34,7 +34,7 @@ class LiveChatController extends Controller
                 $data["customer_photo"] = $customer->image;
 
                 event(new LiveChatEvent($data));
-                return response()->json(['success'=>'Message sent successfully']);
+                return response()->json($data);
             } catch (\Exception $e) {
                 $livechat->delete();
             }
