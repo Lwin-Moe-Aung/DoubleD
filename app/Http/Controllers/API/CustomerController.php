@@ -23,15 +23,21 @@ class CustomerController extends Controller
         $customer = new Customer();
         $customer->name = $request->name;
         $imageName = "/images/customer/default_customer.png";
+        $imageOriginalName = "/images/customer/default_customer.png";
         if ($image = $request->file('image')) {
 
             // for save original image
-            $filename = time() . $image->getClientOriginalName();
+            $filename = time() . rand(1000, 9999) . $image->getClientOriginalName();
             $image_resize = Image::make($image->getRealPath());
             $image_resize->resize(50, 50);
-            $image_resize->save(public_path('images/customer/' . $filename));
-            $imageName = "/images/customer/" . $filename;
+            $image_resize->save(public_path('images/customer/thumbnail/' . $filename));
+            $imageName = "/images/customer/thumbnail/" . $filename;
+
+            $originalfilename = time() . rand(1000, 9999) . $image->getClientOriginalName();
+            $request->file('image')->move(public_path('images/customer/original/'), $originalfilename);
+            $imageOriginalName = "/images/customer/original/" . $originalfilename;
         }
+        $customer->original_image =  $imageOriginalName;
         $customer->image =  $imageName;
         if ($customer->save()) {
             return Response()->json($customer);
