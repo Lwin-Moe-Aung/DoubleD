@@ -22,5 +22,7 @@ Route::get('/getting-stock', [App\Http\Controllers\API\StockController::class, '
 Route::get('/getting-tips', [App\Http\Controllers\API\TipsController::class, 'gettingTips']);
 Route::get('/getting-history/{day}', [App\Http\Controllers\API\StockController::class, 'getHistory']);
 Route::post('/register', [App\Http\Controllers\API\CustomerController::class, 'register']);
+Route::get('/profile/{id}', [App\Http\Controllers\API\CustomerController::class, 'profile']);
+
 Route::post('/live-chat', [App\Http\Controllers\API\LiveChatController::class, 'liveChat']);
 Route::get('/getting-chat-list', [App\Http\Controllers\API\LiveChatController::class, 'index']);
