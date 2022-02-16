@@ -53,38 +53,34 @@ class AutoGenerateMorningStock extends Command
     {
         $randomNumber = random_int(10000000, 99999999);
         $position = Position::first();
-        $selected_stock1 = substr($randomNumber, $position->first_p -1 , 1); 
-        $selected_stock2 = substr($randomNumber, $position->second_p -1 , 1); 
+        $selected_stock1 = substr($randomNumber, $position->first_p - 1, 1);
+        $selected_stock2 = substr($randomNumber, $position->second_p - 1, 1);
         //Saving Stock table
         $ss = new Stock;
         $ss->stock = $randomNumber;
-        $ss->selected_stock = $selected_stock1.$selected_stock2;
+        $ss->selected_stock = $selected_stock1 . $selected_stock2;
         $ss->user_id =  2;
-        if($ss->save()){
+        if ($ss->save()) {
             try {
-                $selected_stock["selected_stock1"] = [
+
+                $data['stock'] = (string)$randomNumber;
+                $data["selected_stock1"] = [
                     "selected_stock1" => $selected_stock1,
                     "stock1_stop" => false,
                 ];
-                $selected_stock["selected_stock2"] = [
+                $data["selected_stock2"] = [
                     "selected_stock1" => $selected_stock2,
                     "stock1_stop" => false,
                 ];
-        
-                $data['stock'] = (string)$randomNumber;
-                $data['selected_stock'] = $selected_stock;
                 $data['is_morning'] = true;
                 // $data['date'] = date('m/d/Y h:i:s A');
-                $data['date'] = \Carbon\Carbon::now()->toFormattedDateString();	
+                $data['date'] = \Carbon\Carbon::now()->toFormattedDateString();
                 $data['time'] = \Carbon\Carbon::now()->format('h:i:s A');
-              
+
                 event(new StockEvent($data));
-               
             } catch (\Exception $e) {
                 $ss->delete();
-               
             }
         }
-
     }
 }

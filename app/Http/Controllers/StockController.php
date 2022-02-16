@@ -140,7 +140,8 @@ class StockController extends Controller
 
                 $data = [];
                 $data['stock'] = $stock;
-                $data['selected_stock'] = $selected_stock;
+                $data['selected_stock1'] = $selected_stock['selected_stock1'];
+                $data['selected_stock2'] = $selected_stock['selected_stock2'];
                 $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true : false;
                 // $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
                 $data['date'] = \Carbon\Carbon::parse($ss->created_at)->toFormattedDateString();
