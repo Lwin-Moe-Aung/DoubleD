@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return redirect('login');
     // return view('test');
@@ -24,9 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tips', 'TipController');
     Route::post('tip-delete/{id}', 'TipController@destroy');
     Route::post('stock-delete/{id}', 'StockController@destroy');
+    Route::get('/reset_selectedlog', 'StockController@resetSelectedLog');
     Route::get('/get-notification', 'NotificationController@getNotification');
     Route::get('/autocomplete-search', 'NotificationController@autocompleteSearch');
-
-   
 });
-

@@ -21,16 +21,16 @@ class StockController extends Controller
         if ($request->ajax()) {
             $data = Stock::select('*')->orderBy('created_at', 'desc');
             return Datatables::of($data)
-                    ->editColumn('created_at', function ($request) {
-                        return $request->created_at->format('m/d/Y h:i:s A'); // human readable format
-                    })
-                    ->addIndexColumn()
-                    ->addColumn('action', function($data){
-                        $btn = '<button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#DeleteStockModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('m/d/Y h:i:s A'); // human readable format
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
+                    $btn = '<button type="button" data-id="' . $data->id . '" data-toggle="modal" data-target="#DeleteStockModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view("admin.stock.index");
     }
@@ -45,8 +45,8 @@ class StockController extends Controller
         // dd(date('m-d-Y'));
         $position = Position::first();
         $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
-        
-        return view('admin.stock.create', compact('position','selected_log'));
+
+        return view('admin.stock.create', compact('position', 'selected_log'));
     }
 
     /**
@@ -62,8 +62,7 @@ class StockController extends Controller
         $request->validate([
             'stock' => 'required'
         ]);
-        if($request->radio != "none"){
-
+        if ($request->radio != "none") {
         }
         $stock1_stop = false;
         $stock2_stop = false;
@@ -71,34 +70,32 @@ class StockController extends Controller
         $stock = $request->stock;
         $first_p = (int)$request->first_p;
         $second_p = (int)$request->second_p;
-        
-        $selected_stock1 = substr( $stock, $first_p-1, 1); 
-        $selected_stock2 = substr( $stock, $second_p-1, 1); 
 
-        if($request->radio != "none"){
-            if($request->radio == "morning_first_select"){
+        $selected_stock1 = substr($stock, $first_p - 1, 1);
+        $selected_stock2 = substr($stock, $second_p - 1, 1);
+
+        if ($request->radio != "none") {
+            if ($request->radio == "morning_first_select") {
                 $selected_log = new SelectedLog;
                 $selected_log->date = date('Y-m-d');
                 $selected_log->morning_first_select = $selected_stock1;
                 $selected_log->save();
                 $stock1_stop = true;
                 $id_column = "mfs_stock_id";
-            }else{
+            } else {
                 $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
-                if($request->radio == "evening_second_select"){
+                if ($request->radio == "evening_second_select") {
                     $selected_log->evening_second_select = $selected_stock2;
                     $selected_log->evening_ss_time = date('Y-m-d H:i:s');
                     $selected_stock1 = $selected_log->evening_first_select;
                     $stock1_stop = true;
                     $stock2_stop = true;
                     $id_column = "ess_stock_id";
-
-                }elseif($request->radio == "evening_first_select"){
+                } elseif ($request->radio == "evening_first_select") {
                     $selected_log->evening_first_select = $selected_stock1;
                     $stock1_stop = true;
                     $id_column = "efs_stock_id";
-                    
-                }else{
+                } else {
                     $selected_log->morning_second_select = $selected_stock2;
                     $selected_log->morning_ss_time = date('Y-m-d H:i:s');
                     $selected_stock1 = $selected_log->morning_first_select;
@@ -107,12 +104,12 @@ class StockController extends Controller
                     $id_column = "mss_stock_id";
                 }
             }
-        }else{
-            if($request->type == "morning_second_select"){
+        } else {
+            if ($request->type == "morning_second_select") {
                 $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
                 $selected_stock1 = $selected_log->morning_first_select;
                 $stock1_stop = true;
-            }elseif($request->type == "evening_second_select"){
+            } elseif ($request->type == "evening_second_select") {
                 $selected_log = SelectedLog::whereDate('date', '=', date('Y-m-d'))->first();
                 $selected_stock1 = $selected_log->evening_first_select;
                 $stock1_stop = true;
@@ -130,13 +127,13 @@ class StockController extends Controller
         //Saving Stock table
         $ss = new Stock;
         $ss->stock = $stock;
-        $ss->selected_stock = $selected_stock1.$selected_stock2;
+        $ss->selected_stock = $selected_stock1 . $selected_stock2;
         $ss->user_id =  $request->user_id;
-        
+
         if ($ss->save()) {
             try {
                 //saving selectedlog table
-                if($id_column != ""){
+                if ($id_column != "") {
                     $selected_log->$id_column = $ss->id;
                     $selected_log->save();
                 }
@@ -144,22 +141,19 @@ class StockController extends Controller
                 $data = [];
                 $data['stock'] = $stock;
                 $data['selected_stock'] = $selected_stock;
-                $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true :false;
+                $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true : false;
                 // $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
-                $data['date'] = \Carbon\Carbon::parse($ss->created_at)->toFormattedDateString();	
+                $data['date'] = \Carbon\Carbon::parse($ss->created_at)->toFormattedDateString();
                 $data['time'] = \Carbon\Carbon::parse($ss->created_at)->format('h:i:s A');
                 event(new StockEvent($data));
                 return redirect()->route('stocks.index')
-                ->with('success','Stock အသစ်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။');
+                    ->with('success', 'Stock အသစ်ထည့်သွင်းခြင်း အောင်မြင်ပါသည်။');
             } catch (\Exception $e) {
                 $ss->delete();
-               
             }
-            
         }
         return redirect()->route('stocks.index')
-                ->with('error','Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
-       
+            ->with('error', 'Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
     }
 
     /**
@@ -209,12 +203,18 @@ class StockController extends Controller
             ->orWhere('efs_stock_id', $id)
             ->orWhere('ess_stock_id', $id)
             ->first();
-        if($selectedLog != null){
-            return response()->json(['error'=>'Stock cannot deleted'],500);
+        if ($selectedLog != null) {
+            return response()->json(['error' => 'Stock cannot deleted'], 500);
         }
-        
-        if(Stock::find($id)->delete()){
-            return response()->json(['success'=>'Stock deleted successfully']);
+
+        if (Stock::find($id)->delete()) {
+            return response()->json(['success' => 'Stock deleted successfully']);
         }
+    }
+
+    public function resetSelectedLog()
+    {
+        SelectedLog::whereDate('date', '=', date('Y-m-d'))->delete();
+        return true;
     }
 }

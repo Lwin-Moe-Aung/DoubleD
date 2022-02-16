@@ -48,7 +48,7 @@
                                                            
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="form-check">
+                                                            <div class="form-check" id="none">
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
@@ -86,6 +86,7 @@
                                                                         <div class="alert alert-success">
                                                                             <strong>Good Job!</strong> Upload complete for Today.Thanks! 
                                                                         </div>
+                                                                        <input type="button" id="reset" value="Reset and Test Again">
                                                                         <input type="text" name="type" class="form-control"
                                                                             value= "today-complete" hidden id="type">
                                                                 @endswitch
@@ -148,8 +149,10 @@
     $(function () {
         var type = document.getElementById("type").value;
         if(type == "today-complete"){
-            document.getElementById("inputStock").disabled = true; 
-            document.getElementById("uploadButton").disabled = true; 
+            document.getElementById("inputStock").hidden = true; 
+            document.getElementById("uploadButton").hidden = true; 
+            document.getElementById("none").hidden = true; 
+
         }
        
         // $.validator.setDefaults({
@@ -188,6 +191,18 @@
                 $(element).removeClass('is-invalid');
             }
         }); 
+        $("#reset").click(function(){
+            $.ajax('/reset_selectedlog', {
+                type: 'GET',  // http method
+                success: function (data, status, xhr) {
+                    location.reload();
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    location.reload();
+                }
+            });
+           
+        });
     }); 
 </script>
 @endsection
