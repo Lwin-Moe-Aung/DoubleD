@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use DB;
 
 use App\Notification;
@@ -22,7 +23,7 @@ class NotificationController extends Controller
     public function index()
     {
         $data = Notification::orderByDesc('created_at')->paginate(10);
-        return view("admin.notifications.index",compact('data'));
+        return view("admin.notifications.index", compact('data'));
     }
 
     /**
@@ -43,46 +44,45 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-       
     }
 
     public function addNotification(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'description' => 'required'
         ]);
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()->all()]);
+            return response()->json(['error' => $validator->errors()->all()]);
         }
         $notification = new Notification();
-        if($request->subject != null){
+        if ($request->subject != null) {
             $notification->subject = $request->subject;
         }
         $notification->description = $request->description;
-        if($notification->save())
-        {
-            try{
+        if ($notification->save()) {
+            try {
                 DB::table('users')
                     ->where('role', '=', 'Subadmin')
                     ->update([
                         'noti_count' => DB::raw('noti_count + 1'),
                     ]);
-                $user = User::select('id','noti_count')
+                $user = User::select('id', 'noti_count')
                     ->where('role', '=', 'Subadmin')
                     ->get()
                     ->toArray();
+
                 event(new NotificationEvent($user));
                 return response()->json(array(
                     'success' => 'အောင်မြင်ပါသည်။',
-                    ));
+                ));
             } catch (\Exception $e) {
                 $notification->delete();
             }
         }
         return response()->json(array(
             'error' => 'မအောင်မြင်ပါ။',
-            ));
+        ));
     }
 
     /**
@@ -131,29 +131,31 @@ class NotificationController extends Controller
             Notification::destroy($request->data);
             return response()->json(array(
                 'success' => 'အောင်မြင်ပါသည်။',
-                ));
-        }
-        catch (\Exception $e) {
+            ));
+        } catch (\Exception $e) {
             return response()->json(array(
                 'error' => 'မအောင်မြင်ပါ။',
-                ));
-        } 
+            ));
+        }
     }
 
     public function getNotification()
     {
         $notification = Notification::select('*')
-                        ->orderByDesc('created_at')
-                        ->limit(5)
-                        ->get();
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->get();
+        if (count($notification) <= 0) {
+            return response()->json([]);
+        }
         $user = User::find(1);
         $uu = User::find(Auth::id());
         $uu->noti_count = 0;
         $uu->save();
 
-        foreach($notification as $key=>$value){
-            $data[$key]['link'] = config('const.IMAGE_URL').'notifications';
-            $data[$key]['image'] = config('const.IMAGE_URL').'images/admin/admin.jpg';
+        foreach ($notification as $key => $value) {
+            $data[$key]['link'] = config('const.IMAGE_URL') . 'notifications';
+            $data[$key]['image'] = config('const.IMAGE_URL') . 'images/admin/admin.jpg';
             $data[$key]['sender'] = $user->name;
             $data[$key]['subject'] = Str::limit($value->subject, 15);
             $data[$key]['description'] = Str::limit($value->description, 50,);
@@ -165,8 +167,8 @@ class NotificationController extends Controller
 
     public function autocompleteSearch(Request $request)
     {
-          $query = $request->get('query');
-          $filterResult = Notification::where('subject', 'LIKE', '%'. $query. '%')->get();
-          return response()->json($filterResult);
-    } 
+        $query = $request->get('query');
+        $filterResult = Notification::where('subject', 'LIKE', '%' . $query . '%')->get();
+        return response()->json($filterResult);
+    }
 }

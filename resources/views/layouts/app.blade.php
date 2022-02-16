@@ -202,7 +202,15 @@
               $('#noti_panel').append(html);
               $('#noti_count').html('');
             }else{
-                alert("fail to delete Mails");
+              $('#noti_panel').html("");
+              var html = "",
+              html = '<div class="media-body">'+
+                        '<h3>'+
+                          '<span>No Data</span>'+
+                        '</h3>'+
+                      '</div>';
+              $('#noti_panel').append(html);
+              $('#noti_count').html('');
             }
             
           }
