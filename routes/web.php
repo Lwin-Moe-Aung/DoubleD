@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 //     // return view('test');
 // });
 
-Route::get('/login', function () {
+Route::get('/', function () {
     return redirect('login');
     // return view('test');
 });
