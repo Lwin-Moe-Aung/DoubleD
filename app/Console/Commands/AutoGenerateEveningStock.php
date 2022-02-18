@@ -68,8 +68,8 @@ class AutoGenerateEveningStock extends Command
                     "stock1_stop" => false,
                 ];
                 $data["selected_stock2"] = [
-                    "selected_stock1" => $selected_stock2,
-                    "stock1_stop" => false,
+                    "selected_stock2" => $selected_stock2,
+                    "stock2_stop" => false,
                 ];
                 $data['is_morning'] = false;
                 $data['date'] = \Carbon\Carbon::now()->toFormattedDateString();

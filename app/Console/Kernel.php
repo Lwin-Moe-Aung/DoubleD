@@ -30,21 +30,21 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('auto-generate-morning-stock')
-                ->weekdays()
-                ->timezone('Asia/Yangon')
-                ->between("09:00","11:30");
+            ->weekdays()
+            ->timezone('Asia/Yangon')
+            ->between("09:00", "11:30");
 
         $schedule->command('auto-generate-evening-stock')
-                ->weekdays()
-                ->timezone('Asia/Yangon')
-                ->between("14:00","17:30");
+            ->weekdays()
+            ->timezone('Asia/Yangon')
+            ->between("18:00", "22:00");
 
         $schedule->command('delete-live-chat')
-                ->timezone('Asia/Yangon')
-                ->weekly();
+            ->timezone('Asia/Yangon')
+            ->weekly();
         $schedule->command('delete-stock')
-                ->timezone('Asia/Yangon')
-                ->weekly();
+            ->timezone('Asia/Yangon')
+            ->weekly();
     }
 
     /**
@@ -54,7 +54,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

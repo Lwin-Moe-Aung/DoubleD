@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('login');
+    return view('welcome');
     // return view('test');
 });
+
+// Route::get('/login', function () {
+//     return redirect('login');
+//     // return view('test');
+// });
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
