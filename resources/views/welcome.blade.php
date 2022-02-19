@@ -62,7 +62,7 @@
                 <img class="u-align-left u-image u-image-default u-image-1" src="{{ asset('images/home/5616c075-1321-4eb6-b209-240e293940d1.png') }}" alt="" data-image-width="584" data-image-height="1080">
                 <img class="u-image u-image-default u-preserve-proportions u-image-2" src="{{ asset('images/home/1e63020d-4933-46a1-82a9-d08890da2624.png') }}" alt="" data-image-width="584" data-image-height="1080">
                 <h2 class="u-align-left u-hidden-xs u-subtitle u-text u-text-white u-text-1">ပိုမို မြန်ဆန် တိကျသော 2D Application</h2>
-                <p class="u-align-left u-large-text u-text u-text-body-alt-color u-text-variant u-text-2">အချိန်နှင့် တပြေးညီ ဒိုက်ရိုက်ကြည့်ရှုနိုင်ခြင်း၊ တိကျမြန်ဆန်မှုရှိခြင်း၊ အသုံးပြုသူ အချင်းချင်း ရင်းနှီးစွာ ချိတ်ဆက် ပြောဆိုနိုင်သော လုပ်ဆောင်ချက်များ</p>
+                <p class="u-align-left u-large-text u-text u-text-body-alt-color u-text-variant u-text-2">အချိန်နှင့် တပြေးညီ တိုက်ရိုက်ကြည့်ရှုနိုင်ခြင်း၊ တိကျမြန်ဆန်မှုရှိခြင်း၊ အသုံးပြုသူ အချင်းချင်း ရင်းနှီးစွာ ချိတ်ဆက် ပြောဆိုနိုင်သော လုပ်ဆောင်ချက်များ</p>
                 <div class="u-align-left u-border-1 u-border-white u-expanded-width-xs u-line u-line-horizontal u-line-1"></div>
                 <img class="u-align-left u-image u-image-default u-image-3" src="{{ asset('images/home/google-play-badge.png') }}" alt="" data-image-width="646" data-image-height="250">
                 <h2 class="u-align-left u-hidden-lg u-hidden-md u-hidden-sm u-hidden-xl u-subtitle u-text u-text-white u-text-3">ပိုမို မြန်ဆန် တိကျသော&nbsp;<br>2D Application
