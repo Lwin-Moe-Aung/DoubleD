@@ -8,11 +8,11 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo/favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset('images/logo/favicon-16x16.png') }}">
         <title>Diamond 2D</title>
-        <link href="{{ asset('home/nicepage.css') }}" rel="stylesheet" >
-        <link href="{{ asset('home/Home.css') }}" rel="stylesheet" >
+        <link href="{{ asset('welcome-page/nicepage.css') }}" rel="stylesheet" >
+        <link href="{{ asset('welcome-page/Home.css') }}" rel="stylesheet" >
         
-        <script src="{{ asset('home/jquery-1.9.1.min.js') }}"></script>
-        <script src="{{ asset('home/nicepage.js') }}"></script>
+        <script src="{{ asset('welcome-page/jquery-1.9.1.min.js') }}"></script>
+        <script src="{{ asset('welcome-page/nicepage.js') }}"></script>
         <meta name="generator" content="Nicepage 4.4.3, nicepage.com">
         <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
         <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i">
@@ -202,21 +202,27 @@
             
             
             <section class="u-backlink u-clearfix u-grey-80">
-              <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-                <span>Website Templates</span>
+                          
+                     
+              <a class="u-link" target="_blank">
+                <span>Version 1</span>
               </a>
               <p class="u-text">
-                <span>created with</span>
+                <span>Copyright &copy; 2022</span>
               </p>
               <a class="u-link" href="" target="_blank">
-                <span>Website Builder Software</span>
-              </a>. 
+                <span>Diamond 2D</span>
+              </a>.
+              <p class="u-text">
+                <span>All rights
+                  reserved.</span>
+              </p> 
             </section><span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; right: 20px; bottom: 20px; background-image: none; box-shadow: 0 2px 8px 0 rgba(128,128,128,1);" class="u-back-to-top u-icon u-icon-circle u-opacity u-opacity-90 u-palette-1-base u-spacing-10 u-text-white" data-href="#">
                 <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
                 <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
             </span>
           </body>
-          <script src="{{ asset('home/party.min.js') }}"></script>
+          <script src="{{ asset('welcome-page/party.min.js') }}"></script>
           <script>
             let count = 2;
             
