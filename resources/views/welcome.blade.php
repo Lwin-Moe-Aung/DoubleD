@@ -162,11 +162,11 @@
                 <div class="u-align-center-sm u-align-center-xs u-border-8 u-border-palette-1-base u-container-style u-expanded-width-sm u-group u-palette-1-base u-group-1">
                   <div class="u-container-layout u-container-layout-1">
                     <h3 class="u-align-center-lg u-align-center-md u-align-center-xl u-text u-text-1">ဆက်သွယ်ရန်</h3>
-                    <p class="u-align-center u-text u-text-2">1 212-736-3100</p>
+                    <p class="u-align-center u-text u-text-2">09-78765636</p>
                     <p class="u-align-center u-text u-text-3">
-                      <a href="mailto:lwinmoeaung.ycc@gmail.com">lwinmoeaung.ycc@gmail.com</a>
+                      <a href="mailto:lwinmoeaung.ycc@gmail.com">aungzarniko968@gmail.com</a>
                     </p>
-                    <div class="u-form u-form-1">
+                    {{-- <div class="u-form u-form-1">
                         <form action="#" method="POST" class="u-block-1074-20 u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="custom">
                             <div class="u-form-group u-form-name">
                                 <label for="name-1c19" class="u-form-control-hidden u-label">Name</label>
@@ -190,7 +190,7 @@
                             <input type="hidden" id="siteId" name="siteId" value="1422722">
                             <input type="hidden" id="pageId" name="pageId" value="1422730">
                         </form>
-                    </div>
+                    </div> --}}
                   </div>
                 </div>
               </div>
@@ -224,7 +224,7 @@
           </body>
           <script src="{{ asset('welcome-page/party.min.js') }}"></script>
           <script>
-            let count = 2;
+            let count = 4;
             
             (function runner(){
                 runWinner(document.getElementById("winner-div"), () => {
