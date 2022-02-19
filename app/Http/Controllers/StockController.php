@@ -122,7 +122,7 @@ class StockController extends Controller
         ];
         $selected_stock["selected_stock2"] = [
             "selected_stock2" => $selected_stock2,
-            "sotck2_stop" => $stock2_stop,
+            "stock2_stop" => $stock2_stop,
         ];
         //Saving Stock table
         $ss = new Stock;
