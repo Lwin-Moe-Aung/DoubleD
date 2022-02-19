@@ -224,25 +224,22 @@
           </body>
           <script src="{{ asset('welcome-page/party.min.js') }}"></script>
           <script>
-            let count = 4;
-            
             (function runner(){
-                runWinner(document.getElementById("winner-div"), () => {
-                    if(--count > 0){
-                      runner();
-                    }
-                });
+              runWinner(document.getElementById("winner-div", 2000));
+
+              setInterval(() => {
+                runWinner(document.getElementById('winner-div', 10));
+              }, 10 * 1000);
             })();
-        
-            function runWinner(target, func){
+            
+            function runWinner(target, timeout){
               setTimeout(() => {
                 party.confetti(target, {
                     count: party.variation.range(130, 150),
                     size: party.variation.range(0.6, 1.4),
                     color: () => party.Color.fromHsl(50, 100, party.random.randomRange(55, 85))
                 });
-                func();
-              }, 1000*(3-count));
+              }, timeout);
             }
           </script>
         </html>
