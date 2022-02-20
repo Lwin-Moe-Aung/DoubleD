@@ -167,7 +167,13 @@
                       <a href="mailto:lwinmoeaung.ycc@gmail.com">aungzarniko968@gmail.com</a>
                     </p>
                     {{-- <div class="u-form u-form-1">
-                        <form action="#" method="POST" class="u-block-1074-20 u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="custom">
+                        @if (Session::has('message_sent'))
+                          <div class="alert alert-success" role="alert">
+                            {{ Session::get('message_sent') }}
+                          </div>
+                        @endif
+                        <form action="{{ route('contact.send') }}" method="POST" enctype="multipart/form-data" class="u-block-1074-20 u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="custom">
+                            @csrf
                             <div class="u-form-group u-form-name">
                                 <label for="name-1c19" class="u-form-control-hidden u-label">Name</label>
                                 <input type="text" placeholder="Name" id="name-1c19" name="name" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-hover-palette-1-base u-input u-input-round u-radius-1 u-white" required="">
@@ -176,28 +182,90 @@
                                 <label for="email-1c19" class="u-form-control-hidden u-label">Email</label>
                                 <input type="email" placeholder="Email" id="email-1c19" name="email" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-hover-palette-1-base u-input u-input-round u-radius-1 u-white" required="">
                             </div>
+                            <div class="u-form-email u-form-group">
+                              <label for="email-1c19" class="u-form-control-hidden u-label">Phone</label>
+                              <input type="text" placeholder="Phone" id="email-1c19" name="phone" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-hover-palette-1-base u-input u-input-round u-radius-1 u-white" required="">
+                            </div>
                             <div class="u-form-group u-form-message">
                                 <label for="message-1c19" class="u-form-control-hidden u-label">Message</label>
-                                <textarea placeholder="Message" rows="4" cols="50" id="message-1c19" name="message" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-hover-palette-1-base u-input u-input-round u-radius-1 u-white" required=""></textarea>
+                                <textarea placeholder="Message" rows="4" cols="50" id="message-1c19" name="msg" class="u-active-palette-1-base u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-hover-palette-1-base u-input u-input-round u-radius-1 u-white" required=""></textarea>
                             </div>
                             <div class="u-align-left u-form-group u-form-submit u-form-group-4">
-                                <a href="#" class="u-btn u-btn-submit u-button-style u-palette-2-base u-btn-1">Submit</a>
-                                <input type="submit" value="submit" class="u-border-black u-form-control-hidden u-input-round">
+                              <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </div>
-                            <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
-                            <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
-                            <input type="hidden" value="" name="recaptchaResponse">
-                            <input type="hidden" id="siteId" name="siteId" value="1422722">
-                            <input type="hidden" id="pageId" name="pageId" value="1422730">
+                           
                         </form>
                     </div> --}}
+                    <div class="u-form u-form-1" >
+                      @if (Session::has('message_sent'))
+                        <div class="alert alert-success" role="alert" >
+                          <span style="color:orange">
+                            {{ Session::get('message_sent') }}
+                          </span>
+                        </div>
+                      @endif
+                      <form action="{{ route('contact.send') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <label for="name" style="color: white">Name</label>
+                        <input type="text" id="fname" name="name" placeholder="Your name.." required style="color: black">
+                    
+                        <label for="email" style="color: white">Email</label>
+                        <input type="email" id="fname" name="email" placeholder="Your email.." required style="color: black">
+
+                        <label for="phone" style="color: white">Phone</label>
+                        <input type="number" id="fname" name="phone" placeholder="Your phone.." required style="color: black">
+                       
+                        <label for="msg" style="color: white">Message</label>
+                        <textarea  name="msg" placeholder="Write something.." style="height:200px; color:black" required></textarea>
+                    
+                        <input type="submit" value="Submit">
+                    
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </section>
-            <style class="u-overlap-style">.u-overlap:not(.u-sticky-scroll) .u-header {
+            <style class="u-overlap-style">
+            .u-overlap:not(.u-sticky-scroll)
+            .u-header {
         background-color: #478ac9 !important; background-image: linear-gradient(to right, #478ac9, #db545a) !important
-        }</style>
+        }
+        	/* Style inputs with type="text", select elements and textareas */
+input[type=text],input[type=email],input[type=number], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+        
+        </style>
             
             
             
