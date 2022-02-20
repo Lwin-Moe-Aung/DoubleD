@@ -164,7 +164,7 @@
                     <h3 class="u-align-center-lg u-align-center-md u-align-center-xl u-text u-text-1">ဆက်သွယ်ရန်</h3>
                     <p class="u-align-center u-text u-text-2">09-78765636</p>
                     <p class="u-align-center u-text u-text-3">
-                      <a href="mailto:lwinmoeaung.ycc@gmail.com">aungzarniko968@gmail.com</a>
+                      <a href="mailto:lwinmoeaung.ycc@gmail.com">omegateam.ygn@gmail.com</a>
                     </p>
                     {{-- <div class="u-form u-form-1">
                         @if (Session::has('message_sent'))
