@@ -9,7 +9,7 @@
     <section class="content">
       <div class="container-fluid">
         <!-- Small Box (Stat card) -->
-        <h5 class="mb-2 mt-4">Small Box</h5>
+        <h5 class="mb-2 mt-4">Dashboard</h5>
         <div class="row">
          
           <!-- ./col -->
@@ -24,7 +24,7 @@
               <div class="icon">
                 <i class="fas fa-user-plus"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{ route('home.customer') }}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -34,9 +34,9 @@
             <!-- small card -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>50</h3>
 
-                <p>Unique Visitors</p>
+                <p>History</p>
               </div>
               <div class="icon">
                 <i class="fas fa-chart-pie"></i>

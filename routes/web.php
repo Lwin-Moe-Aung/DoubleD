@@ -26,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('delete-notification', 'NotificationController@deleteNotification');
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/show-customer', 'HomeController@showCustomer')->name('home.customer');
+    Route::post('customer-delete/{id}', 'HomeController@customerDelete');
+
     Route::resource('stocks', 'StockController');
     Route::resource('notifications', 'NotificationController');
     Route::resource('tips', 'TipController');

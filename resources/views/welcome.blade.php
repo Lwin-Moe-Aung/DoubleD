@@ -218,7 +218,7 @@
                         <label for="msg" style="color: white">Message</label>
                         <textarea  name="msg" placeholder="Write something.." style="height:200px; color:black" required></textarea>
                     
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" style="background-color: rgb(184, 58, 58)">
                     
                       </form>
                     </div>
