@@ -29,6 +29,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Contact Message')->view('emails.ContactMailTemplate');
+        return $this->subject('Contact Message From Diamond 2D')->view('emails.ContactMailTemplate');
     }
 }
