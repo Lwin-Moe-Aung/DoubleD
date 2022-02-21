@@ -80,7 +80,7 @@
          
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>
                 Stock
                 <i class="fas fa-angle-left right"></i>
@@ -103,7 +103,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Tip
                 <i class="fas fa-angle-left right"></i>
@@ -126,7 +126,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
+              <i class="nav-icon far fa-envelope"></i>
               <p>
                 Message
                 <i class="fas fa-angle-left right"></i>

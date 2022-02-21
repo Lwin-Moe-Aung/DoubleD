@@ -25,9 +25,11 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::post('delete-notification', 'NotificationController@deleteNotification');
 
+    //dashboard
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/show-customer', 'HomeController@showCustomer')->name('home.customer');
     Route::post('customer-delete/{id}', 'HomeController@customerDelete');
+    Route::get('/show-history/{day}', 'HomeController@showHistory')->name('home.history');
 
     Route::resource('stocks', 'StockController');
     Route::resource('notifications', 'NotificationController');
