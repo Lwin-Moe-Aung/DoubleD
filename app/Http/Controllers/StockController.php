@@ -8,6 +8,7 @@ use App\Position;
 use App\SelectedLog;
 use App\Events\StockEvent;
 use DataTables;
+use Carbon\Carbon;
 
 class StockController extends Controller
 {
@@ -64,6 +65,21 @@ class StockController extends Controller
         ]);
         if ($request->radio != "none") {
         }
+        //morning
+        $startDate = Carbon::createFromFormat('H:i a', '11:00 AM');
+        $endDate = Carbon::createFromFormat('H:i a', '01:30 PM');
+        $check = Carbon::now()->between($startDate, $endDate, true);
+        //evening
+        $startDate1 = Carbon::createFromFormat('H:i a', '03:30 PM');
+        $endDate1 = Carbon::createFromFormat('H:i a', '06:00 PM');
+        $check1 = Carbon::now()->between($startDate1, $endDate1, true);
+        if($check || $check1){
+            if ($request->radio != "none") {
+                return redirect()->route('stocks.index')
+                    ->with('error', 'Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
+            }
+        }
+
         $stock1_stop = false;
         $stock2_stop = false;
 

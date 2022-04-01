@@ -7,13 +7,15 @@
                 <section class="content">
                     <section class="container-fluid">
                     <div class="row">
-                       
+
                         <div class="col-md-6">
                             <section class="content-header">
                                 <div class="container-fluid">
                                     <div class="row mb-2">
                                         <div class="col-sm-6">
                                             <h1>Stock</h1>
+
+
                                         </div>
                                         <div class="col-sm-6">
                                             <ol class="breadcrumb float-sm-right">
@@ -39,69 +41,79 @@
                                                 <!-- form start -->
                                                 <form action="{{ route('stocks.store') }}" method="POST" id="stockForm">
                                                     @csrf
-                                                   
+
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">Stock</label>
                                                             <input type="number" name="stock" class="form-control"
                                                                 id="inputStock" placeholder="Enter Stock Number">
-                                                           
+
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="form-check" id="none">
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            @if ($selected_log != null)
-                                                                @switch($selected_log)
-                                                                    @case($selected_log->morning_second_select == null)
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
-                                                                            <label class="form-check-label">Morning Second Number</label>
-                                                                        </div>
-                                                                        <input type="text" name="type" class="form-control"
-                                                                            value= "morning_second_select" hidden id="type">
-                                                                        @break
-                                                                    @case($selected_log->evening_first_select == null)
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="radio" value="evening_first_select">
-                                                                            <label class="form-check-label">Evening First Number</label>
-                                                                        </div>
-                                                                        <input type="text" name="type" class="form-control"
-                                                                            value= "evening_first_select" hidden id="type">
-                                                                        {{-- <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
-                                                                            <label class="form-check-label">6:00 Number</label>
-                                                                        </div> --}}
-                                                                        @break
-                                                                    @case($selected_log->evening_second_select == null)
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
-                                                                            <label class="form-check-label">Evening Second Number</label>
-                                                                        </div>
-                                                                        <input type="text" name="type" class="form-control"
-                                                                            value= "evening_second_select" hidden id="type">
-                                                                        @break
-                                                                    @default
-                                                                        <div class="alert alert-success">
-                                                                            <strong>Good Job!</strong> Upload complete for Today.Thanks! 
-                                                                        </div>
-                                                                        <input type="button" id="reset" value="Reset and Test Again">
-                                                                        <input type="text" name="type" class="form-control"
-                                                                            value= "today-complete" hidden id="type">
-                                                                @endswitch
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00')))
+                                                                @if ($selected_log != null)
+                                                                    @switch($selected_log)
+                                                                        @case($selected_log->morning_second_select == null)
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
+                                                                                <label class="form-check-label">Morning Second Number</label>
+                                                                            </div>
+                                                                            <input type="text" name="type" class="form-control"
+                                                                                value= "morning_second_select" hidden id="type">
+                                                                            @break
+                                                                        @case($selected_log->evening_first_select == null)
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="radio" value="evening_first_select">
+                                                                                <label class="form-check-label">Evening First Number</label>
+                                                                            </div>
+                                                                            <input type="text" name="type" class="form-control"
+                                                                                value= "evening_first_select" hidden id="type">
+                                                                            {{-- <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
+                                                                                <label class="form-check-label">6:00 Number</label>
+                                                                            </div> --}}
+                                                                            @break
+                                                                        @case($selected_log->evening_second_select == null)
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
+                                                                                <label class="form-check-label">Evening Second Number</label>
+                                                                            </div>
+                                                                            <input type="text" name="type" class="form-control"
+                                                                                value= "evening_second_select" hidden id="type">
+                                                                            @break
+                                                                        @default
+                                                                            <div class="alert alert-success">
+                                                                                <strong>Good Job!</strong> Upload complete for Today.Thanks!
+                                                                            </div>
+                                                                            <input type="button" id="reset" value="Reset and Test Again">
+                                                                            <input type="text" name="type" class="form-control"
+                                                                                value= "today-complete" hidden id="type">
+                                                                    @endswitch
+                                                                @else
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="radio" value="morning_first_select">
+                                                                        <label class="form-check-label">Morning First Number</label>
+                                                                    </div>
+                                                                    <input type="text" name="type" class="form-control"
+                                                                    value= "morning_first_select" hidden id="type">
+                                                                    {{-- <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
+                                                                    <label class="form-check-label">2:00 Number</label>
+                                                                    </div> --}}
+                                                                @endif
                                                             @else
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="radio" value="morning_first_select">
-                                                                    <label class="form-check-label">Morning First Number</label>
+                                                                <div class="alert alert-success">
+                                                                    <strong>Auto Generate လုပ်ဆောင်နေပါတယ်ရှင့်။</strong>
                                                                 </div>
                                                                 <input type="text" name="type" class="form-control"
-                                                                value= "morning_first_select" hidden id="type">
-                                                                {{-- <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
-                                                                <label class="form-check-label">2:00 Number</label>
-                                                                </div> --}}
+                                                                value= "not_this_time" hidden id="type">
                                                             @endif
+
+
                                                         </div>
                                                         <input type="text" name="user_id" class="form-control"
                                                             value= 1 hidden>
@@ -109,7 +121,7 @@
                                                             value="{{ $position->first_p }}" hidden>
                                                         <input type="text" name="second_p" class="form-control"
                                                             value="{{ $position->second_p }}" hidden>
-                
+
                                                     </div>
                                                     <!-- /.card-body -->
                                                     <div class="card-footer">
@@ -123,7 +135,7 @@
                                         <!--/.col (left) -->
                                         <!-- right column -->
                                         <div class="col-md-6">
-                
+
                                         </div>
                                         <!--/.col (right) -->
                                     </div>
@@ -145,16 +157,19 @@
 @section('scripts')
 
 <script>
-  
+
     $(function () {
+        // datetime = new Date(time);
+        // console.log(datetime);
+        // alert(datetime);
         var type = document.getElementById("type").value;
         if(type == "today-complete"){
-            document.getElementById("inputStock").hidden = true; 
-            document.getElementById("uploadButton").hidden = true; 
-            document.getElementById("none").hidden = true; 
+            document.getElementById("inputStock").hidden = true;
+            document.getElementById("uploadButton").hidden = true;
+            document.getElementById("none").hidden = true;
 
         }
-       
+
         // $.validator.setDefaults({
         //     submitHandler: function () {
         //         alert("Form successful submitted!");
@@ -176,7 +191,7 @@
                     minlength: "နံပါတ် ၈ လုံးထက်နည်းနေ ပါသည်။",
                     maxlength: "နံပါတ် ၈ လုံးထက် များနေ ပါသညါ။"
 
-                    
+
                 }
             },
             errorElement: 'span',
@@ -190,7 +205,7 @@
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
             }
-        }); 
+        });
         $("#reset").click(function(){
             $.ajax('/reset_selectedlog', {
                 type: 'GET',  // http method
@@ -201,8 +216,8 @@
                     location.reload();
                 }
             });
-           
+
         });
-    }); 
+    });
 </script>
 @endsection
