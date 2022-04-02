@@ -159,8 +159,7 @@ class StockController extends Controller
                 $data['selected_stock1'] = $selected_stock['selected_stock1'];
                 $data['selected_stock2'] = $selected_stock['selected_stock2'];
 
-                $ctime = Carbon::createFromFormat('H:i a', '01:15 PM');
-                $data['is_morning'] = Carbon::now()->lt($ctime)  ? true : false;
+                $data['is_morning'] = Carbon::now()->lt($startDate1)  ? true : false;
 
                 // $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true : false;
                 // $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
