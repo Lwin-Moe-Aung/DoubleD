@@ -29,32 +29,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('auto-generate-morning-stock')
-            // ->weekdays()
-            ->timezone('Asia/Yangon')
-            ->between("11:00", "13:30");
-
-        $schedule->command('auto-generate-evening-stock')
-            // ->weekdays()
-            ->timezone('Asia/Yangon')
-            ->between("15:30", "18:00");
-
-        $schedule->command('delete-live-chat')
-            ->timezone('Asia/Yangon')
-            ->weekly();
-        $schedule->command('delete-stock')
-            ->timezone('Asia/Yangon')
-            ->weekly();
-
         // $schedule->command('auto-generate-morning-stock')
         //     // ->weekdays()
         //     ->timezone('Asia/Yangon')
-        //     ->between("11:10", "11:15");
+        //     ->between("11:00", "13:30");
 
         // $schedule->command('auto-generate-evening-stock')
         //     // ->weekdays()
         //     ->timezone('Asia/Yangon')
-        //     ->between("11:20", "11:25");
+        //     ->between("15:30", "18:00");
 
         // $schedule->command('delete-live-chat')
         //     ->timezone('Asia/Yangon')
@@ -62,6 +45,23 @@ class Kernel extends ConsoleKernel
         // $schedule->command('delete-stock')
         //     ->timezone('Asia/Yangon')
         //     ->weekly();
+
+        $schedule->command('auto-generate-morning-stock')
+            // ->weekdays()
+            ->timezone('Asia/Yangon')
+            ->between("14:47", "14:50");
+
+        $schedule->command('auto-generate-evening-stock')
+            // ->weekdays()
+            ->timezone('Asia/Yangon')
+            ->between("14:52", "14:54");
+
+        $schedule->command('delete-live-chat')
+            ->timezone('Asia/Yangon')
+            ->weekly();
+        $schedule->command('delete-stock')
+            ->timezone('Asia/Yangon')
+            ->weekly();
 
 
     }
