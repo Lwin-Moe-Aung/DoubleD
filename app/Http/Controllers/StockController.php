@@ -79,7 +79,9 @@ class StockController extends Controller
                     ->with('error', 'Stock အသစ်ထည့်သွင်ရာတွင် error တစ်ခုခု ရှိနေသည်။ ပြန်လည်လုပ်ဆောင်ပေးပါ။');
             }
         }
-
+        $ctime = Carbon::createFromFormat('H:i a', '03:30 PM');
+        $data = Carbon::now()->lt($ctime)  ? true : false;
+        dd($data);
         $stock1_stop = false;
         $stock2_stop = false;
 
@@ -158,7 +160,11 @@ class StockController extends Controller
                 $data['stock'] = $stock;
                 $data['selected_stock1'] = $selected_stock['selected_stock1'];
                 $data['selected_stock2'] = $selected_stock['selected_stock2'];
-                $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true : false;
+
+                $ctime = Carbon::createFromFormat('H:i a', '01:07 PM');
+                $data['is_morning'] = Carbon::now()->lt($ctime)  ? true : false;
+
+                // $data['is_morning'] = $request->type == "morning_first_select" || $request->type == "morning_second_select" ? true : false;
                 // $data['date'] = $ss->created_at->format('m/d/Y h:i:s A');
                 $data['date'] = \Carbon\Carbon::parse($ss->created_at)->toFormattedDateString();
                 $data['time'] = \Carbon\Carbon::parse($ss->created_at)->format('h:i:s A');
