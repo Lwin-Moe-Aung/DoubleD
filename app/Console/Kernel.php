@@ -32,12 +32,12 @@ class Kernel extends ConsoleKernel
         $schedule->command('auto-generate-morning-stock')
             // ->weekdays()
             ->timezone('Asia/Yangon')
-            ->between("11:00", "13:30");
+            ->between("09:30", "10:00");
 
         $schedule->command('auto-generate-evening-stock')
             // ->weekdays()
             ->timezone('Asia/Yangon')
-            ->between("15:30", "18:00");
+            ->between("10:30", "11:00");
 
         $schedule->command('delete-live-chat')
             ->timezone('Asia/Yangon')
