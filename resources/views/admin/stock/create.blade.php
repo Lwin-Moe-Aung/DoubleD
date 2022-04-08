@@ -54,10 +54,10 @@
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:30'), Carbon\Carbon::createFromTimeString('10:00')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('10:30'), Carbon\Carbon::createFromTimeString('11:00')))
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00')))
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
-                                                                        @case($selected_log->morning_second_select == null)
+                                                                        @case($selected_log->morning_second_select == null )
                                                                             <div class="form-check">
                                                                                 <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
                                                                                 <label class="form-check-label">Morning Second Number</label>
@@ -65,23 +65,24 @@
                                                                             <input type="text" name="type" class="form-control"
                                                                                 value= "morning_second_select" hidden id="type">
                                                                             @break
-                                                                        @case($selected_log->evening_first_select == null)
+                                                                        @case($selected_log->evening_first_select == null )
+
                                                                             <div class="form-check">
                                                                                 <input class="form-check-input" type="radio" name="radio" value="evening_first_select">
                                                                                 <label class="form-check-label">Evening First Number</label>
                                                                             </div>
+
                                                                             <input type="text" name="type" class="form-control"
                                                                                 value= "evening_first_select" hidden id="type">
-                                                                            {{-- <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
-                                                                                <label class="form-check-label">6:00 Number</label>
-                                                                            </div> --}}
+
                                                                             @break
                                                                         @case($selected_log->evening_second_select == null)
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
-                                                                                <label class="form-check-label">Evening Second Number</label>
-                                                                            </div>
+
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="radio" name="radio" value="evening_second_select">
+                                                                                    <label class="form-check-label">Evening Second Number</label>
+                                                                                </div>
+
                                                                             <input type="text" name="type" class="form-control"
                                                                                 value= "evening_second_select" hidden id="type">
                                                                             @break
@@ -98,12 +99,9 @@
                                                                         <input class="form-check-input" type="radio" name="radio" value="morning_first_select">
                                                                         <label class="form-check-label">Morning First Number</label>
                                                                     </div>
+
                                                                     <input type="text" name="type" class="form-control"
-                                                                    value= "morning_first_select" hidden id="type">
-                                                                    {{-- <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="radio" value="morning_second_select">
-                                                                    <label class="form-check-label">2:00 Number</label>
-                                                                    </div> --}}
+                                                                        value= "morning_first_select" hidden id="type">
                                                                 @endif
                                                             @else
                                                                 <div class="alert alert-success">
@@ -112,7 +110,9 @@
                                                                 <input type="text" name="type" class="form-control"
                                                                 value= "not_this_time" hidden id="type">
                                                             @endif
-
+                                                            <div class="alert alert-success" id="morning-task-complete" hidden>
+                                                                <strong>Good Job!</strong>Morning task complete for today.Thanks!
+                                                            </div>
 
                                                         </div>
                                                         <input type="text" name="user_id" class="form-control"
@@ -159,22 +159,27 @@
 <script>
 
     $(function () {
-        // datetime = new Date(time);
-        // console.log(datetime);
-        // alert(datetime);
+
         var type = document.getElementById("type").value;
         if(type == "today-complete"){
             document.getElementById("inputStock").hidden = true;
             document.getElementById("uploadButton").hidden = true;
             document.getElementById("none").hidden = true;
 
+        }else if( type == "evening_first_select" || type == "evening_second_select"){
+            var objDate = new Date();
+            var hours = objDate.getHours();
+            if(hours < 18){
+                document.getElementById("inputStock").hidden = true;
+                document.getElementById("uploadButton").hidden = true;
+                document.getElementById("none").hidden = true;
+                document.getElementById("morning-task-complete").hidden = false;
+
+            }
         }
 
-        // $.validator.setDefaults({
-        //     submitHandler: function () {
-        //         alert("Form successful submitted!");
-        //     }
-        // });
+
+
         $('#stockForm').validate({
             rules: {
                 stock: {
