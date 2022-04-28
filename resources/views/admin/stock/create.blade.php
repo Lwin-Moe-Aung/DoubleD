@@ -54,7 +54,7 @@
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('23:42'), Carbon\Carbon::createFromTimeString('23:43')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('23:44'), Carbon\Carbon::createFromTimeString('23:45')))
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('23:44'), Carbon\Carbon::createFromTimeString('23:45')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('23:46'), Carbon\Carbon::createFromTimeString('23:47')))
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
                                                                         @case($selected_log->morning_second_select == null )
