@@ -66,14 +66,14 @@ class StockController extends Controller
         if ($request->radio != "none") {
         }
         //morning
-        $startDate = Carbon::createFromFormat('H:i a', '10:25 PM');
-        $endDate = Carbon::createFromFormat('H:i a', '10:27 PM');
+        $startDate = Carbon::createFromFormat('H:i a', '10:50 PM');
+        $endDate = Carbon::createFromFormat('H:i a', '10:52 PM');
         // $startDate = Carbon::createFromFormat('H:i a', '11:00 AM');
         // $endDate = Carbon::createFromFormat('H:i a', '11:30 AM');
         $check = Carbon::now()->between($startDate, $endDate, true);
         //evening
-        $startDate1 = Carbon::createFromFormat('H:i a', '10:29 PM');
-        $endDate1 = Carbon::createFromFormat('H:i a', '10:31 PM');
+        $startDate1 = Carbon::createFromFormat('H:i a', '10:54 PM');
+        $endDate1 = Carbon::createFromFormat('H:i a', '10:56 PM');
         // $startDate1 = Carbon::createFromFormat('H:i a', '11:35 AM');
         // $endDate1 = Carbon::createFromFormat('H:i a', '11:36 AM');
         $check1 = Carbon::now()->between($startDate1, $endDate1, true);
