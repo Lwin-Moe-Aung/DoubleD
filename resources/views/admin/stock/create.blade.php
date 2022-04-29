@@ -54,7 +54,7 @@
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('00:32'), Carbon\Carbon::createFromTimeString('00:35')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('00:38'), Carbon\Carbon::createFromTimeString('00:41')))
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('22:03'), Carbon\Carbon::createFromTimeString('22:06')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('22:09'), Carbon\Carbon::createFromTimeString('22:12')))
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
                                                                         @case($selected_log->morning_second_select == null )
@@ -169,7 +169,7 @@
         }else if( type == "evening_first_select" || type == "evening_second_select"){
             var objDate = new Date();
             var hours = objDate.getHours();
-            if(hours < 18){
+            if(hours < 22){
                 document.getElementById("inputStock").hidden = true;
                 document.getElementById("uploadButton").hidden = true;
                 document.getElementById("none").hidden = true;
