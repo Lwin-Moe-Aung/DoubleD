@@ -169,7 +169,7 @@
         }else if( type == "evening_first_select" || type == "evening_second_select"){
             var objDate = new Date();
             var hours = objDate.getHours();
-            if(hours < 22){
+            if(hours < 18){
                 document.getElementById("inputStock").hidden = true;
                 document.getElementById("uploadButton").hidden = true;
                 document.getElementById("none").hidden = true;
