@@ -54,7 +54,8 @@
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00')))
+                                                            {{-- @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00'))) --}}
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:00'), Carbon\Carbon::createFromTimeString('11:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('14:00'), Carbon\Carbon::createFromTimeString('17:30')))
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
                                                                         @case($selected_log->morning_second_select == null )
@@ -169,12 +170,18 @@
         }else if( type == "evening_first_select" || type == "evening_second_select"){
             var objDate = new Date();
             var hours = objDate.getHours();
-            if(hours < 18){
+            var minute = objDate.getMinutes();
+            if(hours < 17){
                 document.getElementById("inputStock").hidden = true;
                 document.getElementById("uploadButton").hidden = true;
                 document.getElementById("none").hidden = true;
                 document.getElementById("morning-task-complete").hidden = false;
 
+            }else if(hours == 17 && minute <= 30){
+                document.getElementById("inputStock").hidden = true;
+                document.getElementById("uploadButton").hidden = true;
+                document.getElementById("none").hidden = true;
+                document.getElementById("morning-task-complete").hidden = false;
             }
         }
 
