@@ -49,7 +49,7 @@ class LiveChatController extends Controller
             ->paginate(10)
             ->toArray();
         if (empty($livechat["data"])) {
-            return response()->json([]);
+            return response()->json($livechat, 200);
         }
         foreach ($livechat["data"] as $key => $liveData) {
             $customer = Customer::find($liveData["customer_id"]);
