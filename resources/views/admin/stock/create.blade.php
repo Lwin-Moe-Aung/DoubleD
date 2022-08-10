@@ -55,7 +55,7 @@
                                                               <label class="form-check-label">None</label>
                                                             </div>
                                                             {{-- @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00'))) --}}
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:00'), Carbon\Carbon::createFromTimeString('11:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('14:00'), Carbon\Carbon::createFromTimeString('17:30')))
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:00'), Carbon\Carbon::createFromTimeString('11:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:10'), Carbon\Carbon::createFromTimeString('17:30')))
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
                                                                         @case($selected_log->morning_second_select == null )
