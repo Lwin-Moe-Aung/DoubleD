@@ -54,8 +54,10 @@
                                                               <input class="form-check-input" type="radio" name="radio" value="none" checked>
                                                               <label class="form-check-label">None</label>
                                                             </div>
-                                                            {{-- @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00'))) --}}
-                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:00'), Carbon\Carbon::createFromTimeString('11:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:20'), Carbon\Carbon::createFromTimeString('15:30')))
+                                                            <!--/stable time don't edit -->
+                                                            @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('11:00'), Carbon\Carbon::createFromTimeString('13:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:30'), Carbon\Carbon::createFromTimeString('18:00')))
+                                                            <!--/stable time don't edit -->
+                                                            {{-- @if (!Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('09:00'), Carbon\Carbon::createFromTimeString('11:30')) && !Carbon\Carbon::now()->between(Carbon\Carbon::createFromTimeString('15:20'), Carbon\Carbon::createFromTimeString('15:30'))) --}}
                                                                 @if ($selected_log != null)
                                                                     @switch($selected_log)
                                                                         @case($selected_log->morning_second_select == null )
@@ -171,18 +173,20 @@
             var objDate = new Date();
             var hours = objDate.getHours();
             var minute = objDate.getMinutes();
-            if(hours < 17){
+            if(hours < 18){
                 document.getElementById("inputStock").hidden = true;
                 document.getElementById("uploadButton").hidden = true;
                 document.getElementById("none").hidden = true;
                 document.getElementById("morning-task-complete").hidden = false;
 
-            }else if(hours == 17 && minute <= 30){
-                document.getElementById("inputStock").hidden = true;
-                document.getElementById("uploadButton").hidden = true;
-                document.getElementById("none").hidden = true;
-                document.getElementById("morning-task-complete").hidden = false;
             }
+            // condition for time has minutes
+            // else if(hours == 17 && minute <= 30){
+            //     document.getElementById("inputStock").hidden = true;
+            //     document.getElementById("uploadButton").hidden = true;
+            //     document.getElementById("none").hidden = true;
+            //     document.getElementById("morning-task-complete").hidden = false;
+            // }
         }
 
 

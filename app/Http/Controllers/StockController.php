@@ -66,16 +66,17 @@ class StockController extends Controller
         if ($request->radio != "none") {
         }
         //morning
-        $startDate = Carbon::createFromFormat('H:i a', '09:00 AM');
-        $endDate = Carbon::createFromFormat('H:i a', '11:30 AM');
-        // $startDate = Carbon::createFromFormat('H:i a', '11:00 AM');
+        // $startDate = Carbon::createFromFormat('H:i a', '09:00 AM');
         // $endDate = Carbon::createFromFormat('H:i a', '11:30 AM');
+        $startDate = Carbon::createFromFormat('H:i a', '11:00 AM'); //stable time don't edit
+        $endDate = Carbon::createFromFormat('H:i a', '01:30 PM');//stable time don't edit
+
         $check = Carbon::now()->between($startDate, $endDate, true);
         //evening
-        $startDate1 = Carbon::createFromFormat('H:i a', '03:20 PM');
-        $endDate1 = Carbon::createFromFormat('H:i a', '03:30 PM');
-        // $startDate1 = Carbon::createFromFormat('H:i a', '11:35 AM');
-        // $endDate1 = Carbon::createFromFormat('H:i a', '11:36 AM');
+        // $startDate1 = Carbon::createFromFormat('H:i a', '03:20 PM');
+        // $endDate1 = Carbon::createFromFormat('H:i a', '03:30 PM');
+        $startDate1 = Carbon::createFromFormat('H:i a', '03:30 PM');//stable time don't edit
+        $endDate1 = Carbon::createFromFormat('H:i a', '06:00 PM');//stable time don't edit
 
         $check1 = Carbon::now()->between($startDate1, $endDate1, true);
         if($check || $check1){
