@@ -84,7 +84,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <h4>Stock ကိုဖျက်မှာ သေချာပါသလားရှင့်?</h4>
+                    <h4>Stock ကိုဖျက်မှာ သေချာပါသလားရှင့်..?</h4>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
