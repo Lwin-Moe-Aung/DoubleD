@@ -7,18 +7,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logo/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/logo/favicon-16x16.png') }}">
-    {{-- <link rel="icon" src="{{ asset('images/logo/diamond_logo.jpg') }}"> --}}
+     <!-- <link rel="icon" src="{{ asset('images/logo/diamond_logo.jpg') }}">  -->
     <title>Diamond 2D</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-   {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-          crossorigin="anonymous"/> --}}
+          crossorigin="anonymous"/>  -->
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.bootstrap4.min.css" /> --}}
+    <link rel="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.bootstrap4.min.css" />  -->
     
     <!-- DataTables -->
     <link href="{{ asset('css/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" >
@@ -129,15 +129,15 @@
     </footer>
 </div>
 
-{{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+<!-- <script src="{{ asset('js/app.js') }}" defer></script>  -->
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  -->
 <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-{{-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script> --}}
-{{-- <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script> --}}
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>  -->
+<!-- <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>  -->
 <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>
 
