@@ -96,36 +96,36 @@
     </div>
 @endsection
 @section('scripts')
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 
 <script>
     $(function () {
         //testing socket data
-        // let ip_address = '127.0.0.1';
         // let ip_address = '18.136.197.205';
+        let ip_address = 'diamond2dmyanmar.com';
   
-        // let socket_port = '8005';
-        // let socket = io(ip_address + ':' + socket_port);
-        // socket.on("private", function (message)
-        // {
-        //     console.log('stock upload channel');
-        //     console.log(message);
-        // });
-        // socket.on("livechat-channel", function (message)
-        // {
-        //     console.log('livechat channel');
-        //     console.log(message);
-        // });
-        // socket.on("tip-upload-channel", function (message)
-        // {
-        //     console.log('tip-upload-channel');
-        //     console.log(message);
-        // });
-        // socket.on("notification-channel", function (message)
-        // {
-        //     console.log('notification-channel');
-        //     console.log(message);
-        // });
+        let socket_port = '8005';
+        let socket = io(ip_address + ':' + socket_port);
+        socket.on("private", function (message)
+        {
+            console.log('stock upload channel');
+            console.log(message);
+        });
+        socket.on("livechat-channel", function (message)
+        {
+            console.log('livechat channel');
+            console.log(message);
+        });
+        socket.on("tip-upload-channel", function (message)
+        {
+            console.log('tip-upload-channel');
+            console.log(message);
+        });
+        socket.on("notification-channel", function (message)
+        {
+            console.log('notification-channel');
+            console.log(message);
+        });
 
         //testing socket data
         
