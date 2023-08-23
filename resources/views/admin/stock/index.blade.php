@@ -102,7 +102,7 @@
     $(function () {
         //testing socket data
         // let ip_address = '18.136.197.205';
-        let ip_address = 'diamond2dmyanmar.com';
+        let ip_address = 'www.diamond2dmyanmar.com';
   
         let socket_port = '8005';
         let socket = io(ip_address + ':' + socket_port);
