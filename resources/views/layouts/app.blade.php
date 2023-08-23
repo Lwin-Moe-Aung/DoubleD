@@ -158,7 +158,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
     // let ip_address = '127.0.0.1';
-    let ip_address = '13.113.153.186';
+    let ip_address = 'www.diamond2dmyanmar.com';
  
     let socket_port = '8005';
     let user_id = $('#user_id').val();
